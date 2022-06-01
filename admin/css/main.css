@@ -1,0 +1,35 @@
+.anticon .anticon-copy {
+    font-size: 16px;
+    vertical-align: text-bottom;
+}
+
+.code-box-code-copy {
+    with: 20px;
+    height: 20px;
+    cursor: pointer;
+    display: inline;
+    margin: 0 10px;
+    font-size: 20px;
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+
+.code-box-code-copy :hover {
+    /*
+hover时scale为110%
+*/
+    color: #4190fe;
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1);
+}

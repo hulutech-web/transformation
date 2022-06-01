@@ -1,0 +1,339 @@
+.classification {
+    width: 200px;
+    height: 100%;
+    position: relative;
+    z-index: 3;
+    background-color: #fff
+}
+
+.classification .banner-left-sectionList {
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+    border-right: none;
+    box-sizing: border-box
+}
+
+.classification .banner-left-sectionList .banner-left-section {
+    padding: 13px 10px;
+    background: #fff;
+    border-left: 4px solid transparent;
+    border-bottom: 1px solid #f0f0f0;
+    border-right: 1px solid #f0f0f0;
+    transition: all .3s ease-in-out;
+    display: flex;
+    cursor: pointer
+}
+
+.classification .banner-left-sectionList .banner-left-section:last-child {
+    border-bottom: none
+}
+
+.classification .banner-left-sectionList .banner-left-section.on,.classification .banner-left-sectionList .banner-left-section:hover {
+    padding-left: 16px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,.08);
+    border-left-color: #d0111a;
+    border-right-color: transparent;
+    position: relative;
+    z-index: 4
+}
+
+.classification .banner-left-sectionList .banner-left-section.on .banner-left-section-inner,.classification .banner-left-sectionList .banner-left-section:hover .banner-left-section-inner {
+    margin-right: -16px
+}
+
+.classification .banner-left-sectionList .banner-left-section.on .banner-left-section-inner .banner-left-section-title,.classification .banner-left-sectionList .banner-left-section:hover .banner-left-section-inner .banner-left-section-title {
+    color: #d0111a
+}
+
+.classification .banner-left-sectionList .banner-left-section .icon-nav {
+    width: 20px;
+    height: 20px;
+    display: inline-block
+}
+
+.classification .banner-left-sectionList .banner-left-section .icon-nav-hotrolling {
+    background: url(https://shadow.zhaogangimg.com/assets/zgw-ssr/img/hotrolling.dadc921.png) 50% no-repeat;
+    background-size: 100%
+}
+
+.classification .banner-left-sectionList .banner-left-section .icon-nav-stell {
+    background: url(https://shadow.zhaogangimg.com/assets/zgw-ssr/img/stell.5b52ef1.png) 50% no-repeat;
+    background-size: 100%
+}
+
+.classification .banner-left-sectionList .banner-left-section .icon-nav-materials {
+    background: url(https://shadow.zhaogangimg.com/assets/zgw-ssr/img/materials.54b06c3.png) 50% no-repeat;
+    background-size: 100%
+}
+
+.classification .banner-left-sectionList .banner-left-section .icon-nav-cold {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAABmFBMVEUAAAD/////f3//VVX/QEAzMzP/MzNVVVVAQED/QEA5OTkzMzNGRkboLkbqKkDtNzevIDDvMEA8PDw5OTnyNjYzMzPyM0DzLjozMzP1Mz3rMTv1MTvtLjftLDX2MzvwLjY0NDQzMzM5OTlAMjLxMDfyLjTsLTnyLTk4ODjzMTc1NTXuLjRxMzmILTPvKzbPKjXvMDX0MDXvLzTvLznwLjj1LjjxKzXkKTLgLTbcLDU2NjZxMjY2NjY1NTWxLjI0NDSvMTQ0NDQzMzNBMzY2NjY1NTWmLjUzMzOYLjSWMDaULzU1NTU0NDR3MTNsMjQzMzMzMzMzMzNHMzU0NDRPMjQzMzMzMzM0NDQzMzMzMzM0NDQ0NDQ0NDQzMzNEMjQ0NDRDMjRCMjNDMjNCMzQzMzMzMzM0NDQzMzM4MzQ7MjM8MzQ5MjI6MzMzMzM6MzM0NDQ0NDQzMzM2MjI5MzMzMzM3MzMzMzMzMzM2MjM3MzQ3MzM3MzMzMzM1MjIzMzMzMzM0MzM0NDQ1NDQzMzMzMzMzMzM0NDQzMzNp3nV8AAAAh3RSTlMAAQIDBAUFBggICQoLCwwOEBAREhMUFBYZGRoaHB0eISIjJCQlJygoKSorLC0tLzAwMDExMjI1ODk6PT1HSEhJSUpLS0xNTVBUVVZgY212hoeWlqKirq+wuLm6u7y9wMHBwsLEyM3O0NLX2N/g4eHi4+Tk5Obn6uvr6+zt7+/w9ff39/j5+vtcVY4QAAABdElEQVQ4y+3TV1fCMByG8RQXooJ7Kw7ce0Xce++9ce+tuBVF1Pdr21aLCY0cLr3wuenN7+T8kzSE/L0MUgAoKqOkjtJKW2KQXxZuo1o1SX7WjamjTLbfFo0t7eWrMAhdsxs+nVhFrsWNyyO1Q7Un4IOa9a7Ng2l2wP5bBebrXIcHk5y7w6YMaaiP6/RgvJxxA/dYb1BgIu+63zAmMW7wHht2qsB0zvW8YbWla8Tb6APW7FSF3L4jPb7nAkc9/YKZLEyAe07O4e0V7fQbpvDQqXwKvCNeoVWDFh0MK2waULOzsFbSwS1tvH0W8ptWoQu7ewdyeGFgTZAImqQ8Sus5aCFCSIKLfCD5BRKDlYFVfiAh0RqsTsvFux8Yguf41AuUmaWsUyyIYV+bXA+eCTlGMsk+xUqECN5o5+hSYc4Zlk1EBIdmZr8aVmDjOZZ0Trvrn47xiEW9k+F1MZcTWDAK3l+c7nfEvFH4oie2mXbkpozkv4D7BFxTzuLhvHP8AAAAAElFTkSuQmCC) 50% no-repeat;
+    background-size: 100%
+}
+
+.classification .banner-left-sectionList .banner-left-section .icon-nav-plate {
+    background: url(https://shadow.zhaogangimg.com/assets/zgw-ssr/img/plate.c025bc8.png) 50% no-repeat;
+    background-size: 100%
+}
+
+.classification .banner-left-sectionList .banner-left-section .icon-nav-pipe {
+    background: url(https://shadow.zhaogangimg.com/assets/zgw-ssr/img/pipe.1971435.png) 50% no-repeat;
+    background-size: 100%
+}
+
+.classification .banner-left-sectionList .banner-left-section .icon-nav.yuangang {
+    background: url(https://shadow.zhaogangimg.com/assets/zgw-ssr/img/yuangang.c984942.png) 50% no-repeat;
+    background-size: 100%
+}
+
+.classification .banner-left-sectionList .banner-left-section .el-icon-arrow-right {
+    color: #ccc;
+    font-size: 12px
+}
+
+.classification .banner-left-sectionList .banner-left-section .banner-left-section-inner {
+    position: relative;
+    width: 150px;
+    box-sizing: border-box;
+    padding: 0 10px
+}
+
+.classification .banner-left-sectionList .banner-left-section .banner-left-section-inner .banner-left-section-title {
+    color: #333;
+    font-size: 15px
+}
+
+.classification .banner-left-sectionList .banner-left-section .banner-left-section-inner .banner-left-section-sub {
+    margin-top: 10px;
+    height: 12px;
+    overflow: hidden
+}
+
+.classification .banner-left-sectionList .banner-left-section .banner-left-section-inner .banner-left-section-sub .banner-left-section-ul .banner-left-section-li {
+    float: left;
+    margin-right: 10px;
+    line-height: 1
+}
+
+.classification .banner-left-sectionList .banner-left-section .banner-left-section-inner .banner-left-section-sub .banner-left-section-ul .banner-left-section-li:last-child {
+    margin-right: 0
+}
+
+.classification .banner-left-sectionList .banner-left-section .banner-left-section-inner .banner-left-section-sub .banner-left-section-ul .banner-left-section-li .banner-left-section-a {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 130px;
+    display: inline-block;
+    text-decoration: none;
+    line-height: 1;
+    color: #999
+}
+
+.classification .banner-left-sectionList .banner-left-section .banner-left-section-inner .banner-left-section-sub .banner-left-section-ul .banner-left-section-li .banner-left-section-a:hover {
+    color: #d0111a
+}
+
+.classification .banner-left-sectionList .banner-left-section .banner-left-section-inner .arrow-right {
+    position: absolute;
+    right: 0;
+    top: 4px;
+    display: block;
+    width: 10px
+}
+
+.classification .banner-left-sectionContent {
+    transition: all .3s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+    display: flex;
+    position: absolute;
+    width: 990px;
+    height: 100%;
+    background: #fff;
+    z-index: 3;
+    top: 0;
+    left: 100%;
+    border: 1px solid #f0f0f0;
+    border-left: 0;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,.08)
+}
+
+.classification .banner-left-sectionContent.animation {
+    opacity: 1;
+    visibility: visible
+}
+
+.classification .banner-left-sectionContent .banner-left-dl {
+    float: left;
+    width: 592px;
+    border-right: 1px solid #f2f2f2;
+    padding: 16px 20px;
+    height: 100%;
+    box-sizing: border-box;
+    overflow-y: auto
+}
+
+.classification .banner-left-sectionContent .banner-left-dl dl {
+    margin-bottom: 10px
+}
+
+.classification .banner-left-sectionContent .banner-left-dl dl dt {
+    margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 16px
+}
+
+.classification .banner-left-sectionContent .banner-left-dl dl dd {
+    padding-bottom: 10px;
+    overflow: hidden
+}
+
+.classification .banner-left-sectionContent .banner-left-dl dl dd .banner-left-dl-link {
+    font-size: 13px;
+    line-height: 23px;
+    float: left;
+    margin-right: 28px;
+    color: #666
+}
+
+.classification .banner-left-sectionContent .banner-left-dl dl dd .banner-left-dl-link:hover {
+    color: #d0111a
+}
+
+.classification .banner-left-sectionContent .banner-left-dl .banner-left-dl-item {
+    position: relative;
+    margin-bottom: 22px
+}
+
+.classification .banner-left-sectionContent .banner-left-dl .banner-left-dl-item .more {
+    position: absolute;
+    right: 10px;
+    top: 0;
+    font-size: 13px;
+    font-weight: 400;
+    color: #999;
+    line-height: 14px;
+    height: 14px;
+    cursor: pointer
+}
+
+.classification .banner-left-sectionContent .banner-left-dl .banner-left-dl-item .more .arrow {
+    width: 10px
+}
+
+.classification .banner-left-sectionContent .banner-left-ad {
+    float: left;
+    position: relative;
+    width: 398px;
+    height: 100%;
+    box-sizing: border-box;
+    padding-top: 16px;
+    padding-left: 20px
+}
+
+.classification .banner-left-sectionContent .banner-left-ad:after {
+    content: "广告";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 28px;
+    height: 16px;
+    font-size: 12px;
+    border: 1px solid #f0f0f0;
+    color: #ccc;
+    text-align: center;
+    line-height: 16px;
+    z-index: 2
+}
+
+.classification .banner-left-sectionContent .banner-left-ad .banner-left-ad-li {
+    float: left;
+    width: 180px;
+    height: 80px;
+    border-bottom: 1px solid #f0f0f0;
+    border-right: 1px solid #f0f0f0;
+    box-sizing: border-box;
+    overflow: hidden
+}
+
+.classification .banner-left-sectionContent .banner-left-ad .banner-left-ad-li:nth-child(2n) {
+    border-right: none;
+    margin-right: 0
+}
+
+.classification .banner-left-sectionContent .banner-left-ad .banner-left-ad-li.bdb-none {
+    border-bottom: none
+}
+
+.classification .banner-left-sectionContent .banner-left-ad .banner-left-ad-li .banner-left-ad-li-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    transition: top .3s ease;
+    background-image: url(https://shadow.zhaogangimg.com/assets/zgw-ssr/img/preload-img-placeholder.d3e8c4f.svg);
+    background-size: auto 70px;
+    background-position: 50%;
+    top: 0;
+    position: relative
+}
+
+.classification .banner-left-sectionContent .banner-left-ad .banner-left-ad-li .banner-left-ad-li-link:hover {
+    top: -2px
+}
+
+.classification .banner-left-sectionContent .banner-left-ad .banner-left-ad-li .ad-img {
+    width: 100%;
+    height: 100%
+}
+
+.classification .el-carousel__container {
+    height: 512px!important
+}
+
+.classification .banner-left-ad .el-carousel {
+    height: 100%;
+    overflow: hidden
+}
+
+.gc-navigation-wrap[data-v-7901c3b8] {
+    box-sizing: border-box;
+    background: #fff;
+    border-bottom: 1px solid #e1e1e1
+}
+
+.gc-navigation-wrap .home-page-head[data-v-7901c3b8] {
+    position: relative;
+    z-index: 3
+}
+
+.gc-navigation-wrap .home-page-head .home-nav-link[data-v-7901c3b8] {
+    width: 200px;
+    height: 43px;
+    display: flex;
+    align-items: center;
+    color: #999;
+    font-size: 15px;
+    background: #f8f8f8;
+    font-weight: 500;
+    cursor: pointer;
+    box-sizing: border-box;
+    padding-left: 15px
+}
+
+.gc-navigation-wrap .home-page-head .home-nav-link .home-nav-icon[data-v-7901c3b8] {
+    color: #ccc;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px
+}
+
+.gc-navigation-wrap .fl[data-v-7901c3b8] {
+    display: none
+}
+
+.gc-navigation-wrap .fl.show[data-v-7901c3b8] {
+    display: unset
+}

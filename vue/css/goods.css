@@ -1,0 +1,39 @@
+.pic-text-container {
+    line-height: 2;
+    font-size: 16px;
+    color: #666;
+    margin-top: 40px
+}
+
+.pic-text-container .spxq-img {
+    background: #f8f8f8;
+    max-width: 100%;
+    display: block;
+    margin: 20px auto
+}
+
+.params-data[data-v-3af0c43c] {
+    font-size: 13px
+}
+
+.params-data .params-item[data-v-3af0c43c] {
+    margin-bottom: 20px;
+    width: 25%
+}
+
+.params-data .label[data-v-3af0c43c] {
+    display: inline-block;
+    padding-right: 10px;
+    width: 60px;
+    color: #999
+}
+
+.params-data .value[data-v-3af0c43c] {
+    display: inline-block;
+    color: #333;
+    padding-right: 20px;
+    width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}

@@ -1,0 +1,35 @@
+@import "./app.546bdb0.css";
+@import "./app.ec7d99f.css";
+@import "./index.2ba6372.css";
+@import './index.83943cd.css';
+@import './index.f93b3f5.css';
+@import './index.1ef7878.css';
+@import "./search.4c837ae.css";
+@import "./goods.css";
+@import './id1c.css';
+@import './id22.css';
+@import './id23.css';
+@import './gua.css';
+@import './cunfangdi.css';
+
+.gc-navigation-wrap .home-page-head .home-nav-link {
+    width: 200px;
+    height: 43px;
+    display: flex;
+    align-items: center;
+    color: #999;
+    font-size: 15px;
+    background: #f8f8f8;
+    font-weight: 500;
+    cursor: pointer;
+    box-sizing: border-box;
+    padding-left: 15px;
+}
+
+body {
+    font-size: 1rem !important;
+}
+
+.fs-small{
+    font-size:12px;
+}

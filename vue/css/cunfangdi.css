@@ -1,0 +1,77 @@
+.search-table-row[data-v-72380cfc] {
+    position: relative
+}
+
+.search-table-row.multiple .row-list[data-v-72380cfc],.search-table-row.table-more .row-list[data-v-72380cfc] {
+    margin-right: 160px;
+    overflow: auto;
+    max-height: 142px;
+    height: auto
+}
+
+.search-table-row.multiple .row-list .row-list-item[data-v-72380cfc],.search-table-row.table-more .row-list .row-list-item[data-v-72380cfc] {
+    margin-top: 6px;
+    max-width: none
+}
+
+.search-table-row.multiple .row-list .row-list-item[data-v-72380cfc]:first-child,.search-table-row.table-more .row-list .row-list-item[data-v-72380cfc]:first-child {
+    margin-top: 0
+}
+
+.search-table-row.multiple .row-list .row-list-item .kind-list[data-v-72380cfc],.search-table-row.table-more .row-list .row-list-item .kind-list[data-v-72380cfc] {
+    width: 820px
+}
+
+.search-table-row.multiple .operate[data-v-72380cfc] {
+    display: none
+}
+
+.search-table-row.multiple .new-btns[data-v-72380cfc] {
+    display: block
+}
+
+.search-table-row .row-list[data-v-72380cfc] {
+    position: relative;
+    margin-right: 160px;
+    height: 26px;
+    overflow: hidden
+}
+
+.search-table-row .row-list .row-list-item[data-v-72380cfc] {
+    max-width: 722px;
+    line-height: 26px
+}
+
+.search-table-row .row-list .row-list-item .kind-title[data-v-72380cfc] {
+    float: left;
+    font-size: 12px;
+    width: 70px;
+    margin-right: 10px;
+    color: #999
+}
+
+.search-table-row .row-list .row-list-item .kind-list .kind-list-item[data-v-72380cfc] {
+    cursor: pointer;
+    margin-right: 16px
+}
+
+.search-table-row .row-list .row-list-item .kind-list .kind-list-item.active[data-v-72380cfc],.search-table-row .row-list .row-list-item .kind-list .kind-list-item[data-v-72380cfc]:hover {
+    color: #d0111a
+}
+
+.search-table-row .operate[data-v-72380cfc] {
+    top: 0
+}
+
+.search-table-row .new-btns[data-v-72380cfc],.search-table-row .operate[data-v-72380cfc] {
+    position: absolute;
+    right: 20px;
+    height: 26px;
+    width: 160px;
+    text-align: right
+}
+
+.search-table-row .new-btns[data-v-72380cfc] {
+    display: none;
+    bottom: 0
+}

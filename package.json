@@ -1,0 +1,50 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production"
+    },
+    "devDependencies": {
+        "axios": "^0.21",
+        "browser-sync": "^2.26.14",
+        "browser-sync-webpack-plugin": "2.2.2",
+        "laravel-mix": "^6.0.6",
+        "postcss": "^8.1.14",
+        "resolve-url-loader": "3.1.0",
+        "vue-loader": "^15.9.5",
+        "vue-template-compiler": "^2.6.12"
+    },
+    "dependencies": {
+        "@ant-design-vue/pro-layout": "1.0.11",
+        "@antv/data-set": "^0.11.8",
+        "ant-design-vue": "1.7.8",
+        "docx-preview": "^0.1.11",
+        "echarts": "4.9.0",
+        "less": "^4.1.2",
+        "less-loader": "^10.2.0",
+        "lodash": "^4.17.21",
+        "mammoth": "^1.4.21",
+        "moment": "^2.29.3",
+        "nprogress": "^0.2.0",
+        "path-browserify": "^1.0.1",
+        "postcss-import": "^14.0.0",
+        "sass": "^1.32.5",
+        "sass-loader": "^10.1.1",
+        "stream-browserify": "^3.0.0",
+        "three": "0.121.0",
+        "v-charts": "^1.19.0",
+        "vanta": "^0.5.22",
+        "vue": "^2.6.12",
+        "vue-cropper": "^0.5.8",
+        "vue-esign": "^1.1.0",
+        "vue-router": "^3.5.0",
+        "vuedraggable": "^2.24.3",
+        "vuex": "^3.6.2",
+        "webpack-bundle-analyzer": "^4.4.0"
+    }
+}

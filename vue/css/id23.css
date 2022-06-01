@@ -1,0 +1,72 @@
+.shop-navs[data-v-02c9325a] {
+    height: 155px;
+    background-color: #f0f0f0;
+    background-size: 100% 100%
+}
+
+.shop-navs .shop-intro[data-v-02c9325a] {
+    height: 110px
+}
+
+.shop-navs .shop-intro .shop-intro-l[data-v-02c9325a] {
+    height: 90px;
+    display: flex;
+    align-items: center
+}
+
+.shop-navs .shop-intro .shop-intro-l .shop-logo-box[data-v-02c9325a] {
+    width: 90px;
+    height: 90px;
+    background: url(https://shadow.zhaogangimg.com/assets/zgw-ssr/img/shop-logo-bg.a508164.png) 50%;
+    background-size: 100% 100%;
+    padding: 0 1px 4px;
+    box-sizing: border-box
+}
+
+.shop-navs .shop-intro .shop-intro-l .shop-logo-box .shop-logo-img[data-v-02c9325a] {
+    width: 100%;
+    height: 100%
+}
+
+.shop-navs .shop-intro .shop-intro-l .shop-name[data-v-02c9325a] {
+    color: #fff;
+    margin-left: 20px;
+    font-size: 26px
+}
+
+.shop-navs .shop-intro .shop-intro-r[data-v-02c9325a] {
+    width: 96px;
+    height: 100px;
+    background-size: 100% 100%;
+    text-align: center;
+    padding-top: 10px;
+    line-height: 1.4;
+    font-size: 16px;
+    box-sizing: border-box
+}
+
+.shop-navs .shop-intro .shop-intro-r .shop-intro-r-num[data-v-02c9325a] {
+    font-size: 40px
+}
+
+.shop-navs .nav-list[data-v-02c9325a] {
+    line-height: 45px
+}
+
+.shop-navs .nav-list .nav-item[data-v-02c9325a] {
+    line-height: 45px;
+    display: inline-block;
+    padding: 0 24px;
+    font-size: 14px;
+    color: #fff;
+    cursor: pointer;
+    background-position: center 85%;
+    background-repeat: no-repeat
+}
+
+.shop-page .position-sticky[data-v-0133c0dd] {
+    position: -webkit-sticky;
+    position: sticky;
+    left: 0;
+    top: 0
+}

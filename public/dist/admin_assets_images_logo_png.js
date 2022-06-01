@@ -1,0 +1,18 @@
+"use strict";
+(self["webpackChunk"] = self["webpackChunk"] || []).push([["admin_assets_images_logo_png"],{
+
+/***/ "./admin/assets/images/logo.png":
+/*!**************************************!*\
+  !*** ./admin/assets/images/logo.png ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/logo.png?33237e58e0ddbe08c426a0d6762b8d58");
+
+/***/ })
+
+}]);

@@ -1,0 +1,5 @@
+require('./utils/axios')
+require('./utils/filter')
+require('./plugins/directive')
+require('./plugins/watermark')
+require('./plugins/scrollTo')
