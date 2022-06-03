@@ -4,8 +4,6 @@ namespace App\Services\ModifyExcel;
 
 use app\Models\CarReport;
 use Auth;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 /**
  * 修改Excel服务
@@ -13,15 +11,6 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
  */
 class ModifyExcelService
 {
-    public function modify()
-    {
-        $spreadsheet = new Spreadsheet();
-        $sheet = $spreadsheet->getActiveSheet();
-        $sheet->setCellValue('A1', 'Hello World !');
-        $writer = new Xlsx($spreadsheet);
-        $writer->save('hello world.xlsx');
-    }
-
     public function handleData(CarReport $carreport)
     {
         $company_name = $carreport->company_name;
