@@ -13,6 +13,8 @@ class ModifyExcelService
 {
     public function handleData(CarReport $carreport)
     {
+        //設置語言
+
         $company_name = $carreport->company_name;
         $report_date = $carreport->report_date;
         $car_number = $carreport->car_number;
@@ -58,7 +60,7 @@ class ModifyExcelService
             $sheet->setCellValue('B'.$i, $repair_project[$j]['value']);
             $i++;
         }
-//設置合計金額
+        //設置合計金額
         $sheet->setCellValue('I'.$i, $total_cost);
         /**
          * END第二部分（可變部分）
@@ -70,7 +72,7 @@ class ModifyExcelService
             //設置序號從1開始，減去2
             $sheet->setCellValue('A'.$k, $k - $i - 2);
             $sheet->setCellValue('B'.$k, '檢查 : '.$content['title']);
-//            如果$value的值為正常，更換，建議更換
+            //            如果$value的值為正常，更換，建議更換
             switch ($content['value']) {
                 case '正常':
                     $sheet->setCellValue('F'.$k, '☑');
@@ -91,7 +93,7 @@ class ModifyExcelService
         //寫入維修人員
 
         $sheet->setCellValue('A'.$k + 2, '維修人員：'.Auth::user()->name);
-//
+        //
 
 
         $k = $k + 5;
@@ -101,27 +103,31 @@ class ModifyExcelService
         $m = $k + 1;
         // 放置圖片
         $imgs = $carreport->attachment;
-//        $imgResource = file_get_contents(public_path($imgUrl));
+        //        $imgResource = file_get_contents(public_path($imgUrl));
         $sheet->insertNewRowBefore($m, 1);
+        $letters = ['A', 'B', 'C', 'D', 'E', 'F'];
         for ($y = 0; $y < count($imgs); $y++) {
             $imgUrl = str_replace(env('APP_URL'), '', $imgs[$y]);
             $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
             $drawing->setPath(public_path($imgUrl));
-            $drawing->setHeight(200);
-            $drawing->setWidth(200);
+            $spreadsheet->getActiveSheet()->getRowDimension($m)->setRowHeight(400, 'pt');
+            $drawing->setHeight(400);
+            $drawing->setWidth(600);
             $drawing->setCoordinates('A'.$m);
-            //第一張圖移動200，第二張圖移動400，第三張圖移動600，第四張圖移動800
-            $drawing->setOffsetX(400 * $y);
-            $drawing->setOffsetY(30);
             $drawing->setWorksheet($sheet);
+            $m++;
         }
 
-
+        $date = date('Y-m-dH:i:s');
         // 將修改的數據寫入到指定的文件
         $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
-        //獲取當前日期時間
-        $date = date('Y-m-dH:i:s');
-        $writer->save(public_path('pdf/output/carReport'.$date.'.xlsx'));
-        return $k;
+        $filename = 'carReport'.$date;
+        $writer->save(public_path('pdf/outputExcel/'.$filename.'.xlsx'));
+        $pdfWriter = new \PhpOffice\PhpSpreadsheet\Writer\Pdf\Dompdf($spreadsheet);
+        $pdfWriter->save(public_path('pdf/outputPdf/'.$filename.'.pdf'));
+
+        //删除清空：
+//        $spreadsheet->disconnectWorksheets();
     }
+
 }

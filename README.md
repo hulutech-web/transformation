@@ -42,4 +42,4 @@ picqer/php-barcode-generator：二维码生成
 
 spatie/laravel-permission：角色权限
 
-webpatser/laravel-uuid：uuid生成器
+webpatser/laravel-uuid：uuid生成器 mpdf/mpdf:pdf渲染庫
