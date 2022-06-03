@@ -1,16 +1,16 @@
 <template>
     <div class="clearfix">
         <a-upload :action="actionUrl" list-type="picture-card" :file-list="fileList" @preview="handlePreview"
-                  @change="handleChange" :headers="headers">
+            @change="handleChange" :headers="headers">
             <div v-if="fileList.length < 8">
-                <a-icon type="plus"/>
+                <a-icon type="plus" />
                 <div class="ant-upload-text">
                     图集上传
                 </div>
             </div>
         </a-upload>
         <a-modal :visible="previewVisible" :footer="null" @cancel="handleCancel">
-            <img alt="example" style="width: 100%" :src="previewImage"/>
+            <img alt="example" style="width: 100%" :src="previewImage" />
         </a-modal>
     </div>
 </template>
@@ -98,7 +98,7 @@ export default {
             this.previewImage = file.url || file.preview;
             this.previewVisible = true;
         },
-        handleChange({file, fileList}) {
+        handleChange({ file, fileList }) {
             this.fileList = fileList
             if (file.status !== 'uploading') {
                 this.$message.success(`成功`);
@@ -110,14 +110,13 @@ export default {
                         images.push(file.url)
                     }
                 })
-                this.$emit("changeImages", {images: images, fieldName: this.fieldName})
+                this.$emit("changeImages", images)
             }
         },
     },
 };
 </script>
 <style lang="scss" scoped>
-
 .ant-upload-select-picture-card i {
     font-size: 32px;
     color: #999;

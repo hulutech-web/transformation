@@ -1,16 +1,14 @@
 <?php
 
 use App\Api\AuthController;
-use App\Api\BuildController;
 use App\Api\CaptchaController;
-use App\Api\ContractController;
-use App\Api\ContractRecordController;
+use App\Api\CarReportController;
+use App\Api\CarReportItemController;
 use App\Api\HomeController;
 use App\Api\MenuController;
-use App\Api\OwnerController;
+use App\Api\ModifyExcelController;
 use App\Api\PermissionController;
 use App\Api\RoleController;
-use App\Api\UnitController;
 use App\Api\UploadController;
 use App\Api\UserController;
 use Illuminate\Support\Facades\Route;
@@ -53,63 +51,19 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 
     Route::post('upload/image', [UploadController::class, 'uploadImage']);
-    //楼盘信息
-    Route::post('admin/build', [BuildController::class, 'store']);
-    Route::get('admin/build', [BuildController::class, 'index']);
-    Route::get('admin/build/{build}', [BuildController::class, 'show']);
-    Route::put('admin/build/{build}', [BuildController::class, 'update']);
 
-    Route::delete('admin/build/{build}', [BuildController::class, 'destroy']);
-    //搜索
-    Route::post("admin/build/search", [BuildController::class, 'searchBuild']);
-    Route::post('admin/build/list', [BuildController::class, 'list']);
-
-    //楼盘单元
-    Route::post("admin/build/{build}/unit", [UnitController::class, 'store']);
-    Route::get("admin/build/{build}/unit", [UnitController::class, 'index']);
-    Route::put("admin/build/{build}/unit/{unit}", [UnitController::class, 'update']);
-    Route::delete("admin/build/{build}/unit/{unit}", [UnitController::class, 'destroy']);
-    //住户
-    Route::post('admin/build/{build}/unit/{unit}/owner', [OwnerController::class, 'store']);
-    Route::delete('admin/build/{build}/unit/{unit}/owner/{owner}', [OwnerController::class, 'destroy']);
-    Route::put('admin/build/{build}/unit/{unit}/owner/{owner}', [OwnerController::class, 'update']);
-
-    Route::get("admin/owner", [OwnerController::class, 'index']);
-
-    Route::get('admin/owner/{owner}', [OwnerController::class, 'show']);
-    Route::post("admin/owner/searchOwner", [OwnerController::class, 'searchOwner']);
-//提供前端远程搜索
-    Route::post("admin/owner/filterOwner", [OwnerController::class, 'filterOwner']);
-
-    //远程输入框搜索
-    Route::post("admin/owner/remoteOwner", [OwnerController::class, 'remoteOwner']);
-
-    //合同【获取条形码】
-    Route::post('admin/contract/getCode', [ContractController::class, 'getCode']);
     //获取UUID值
-    Route::post('admin/contract/getUuid', [ContractController::class, 'getUuid']);
-
-    //合同预览图
-
-    Route::post('admin/contract/{contract}/preview', [ContractController::class, 'getPreviewContract']);
-
-    Route::apiResource('admin/contract', ContractController::class);
-    //获取业务员的合同列表
-    Route::post('admin/user/{user}/contract/getUserContract', [ContractController::class, 'getUserContract']);
-    //关键字搜索
-    Route::post('admin/user/{user}/contract/getOwnerContract', [ContractController::class, 'getOwnerContract']);
-//    财务可查合同
-    Route::post("admin/contract/finance", [ContractController::class, 'getFinancialContract']);
-//    财务缴费
-    Route::post("admin/contract/{contract}/putFinancialPayment", [ContractController::class, 'putFinancialPayment']);
-
-    //查询缴费历史
-
-    Route::post('admin/FinancialHistory', [ContractRecordController::class, 'queryHistory']);
-    Route::post('admin/contractrecord/allhistory', [ContractRecordController::class,'allhistory']);
-    //首页汇总
-
     Route::post("admin/home", [HomeController::class, 'index']);
+    //测试excel
+    Route::post('admin/excel/test', [ModifyExcelController::class, 'testExcel']);
+    // 汽車報告選項
+    Route::post('admin/caritem/fieldinit', [CarReportItemController::class, 'init']);
+    Route::get('admin/caritem/index', [CarReportItemController::class, 'index']);
+    // 汽車報告
+    Route::apiResource('admin/carreport', CarReportController::class);
+
+    //生成PDF
+    Route::post("admin/carreport/{carreport}/export", [CarReportController::class, 'export']);
 });
 
 //-----------------------后台路由END-----------------------

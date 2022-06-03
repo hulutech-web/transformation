@@ -40,143 +40,67 @@ return [
     [
         'id' => 4,
         'parent_id' => 0,
-        'path' => '/admin/build',
-        'icon' => 'solution',
+        'path' => '/admin/car',
+        'icon' => 'setting',
         'meta' => array(
-            'title' => '楼盘管理',
-            'permission' => 'admin.build',
-            'description' => '楼盘基本信息操作',
+            'title' => '汽车管理',
+            'permission' => 'admin.car',
+            'description' => '汽车报告管理',
         ),
-        'name' => 'admin.build',
-        'children' => array([
-            'id' => 5,
-            'parent_id' => 4,
-            'icon' => 'file-sync',
-            'path' => '/admin/build/index',
-            'meta' => array(
-                'title' => '楼盘列表',
-                'permission' => 'admin.build.index',
-                'description' => '展示录入楼盘基本信息',
-            ),
-            'name' => 'admin.build.index',
-        ], [
-            'id' => 6,
-            'parent_id' => 4,
-            'icon' => 'funnel-plot',
-            'path' => '/admin/build/create',
-            'meta' => array(
-                'title' => '添加楼盘',
-                'permission' => 'admin.build.create',
-                'description' => '录入楼盘基本信息',
-            ),
-            'name' => 'admin.build.create',
-        ],
-        )
+        'name' => 'admin.car',
+        'children' => array(
+            [
+                'id' => 5,
+                'parent_id' => 4,
+                'icon' => 'contacts',
+                'path' => '/admin/car/index',
+                'meta' => array(
+                    'title' => '汽车报告列表',
+                    'permission' => 'admin.car.index',
+                    'description' => '展示汽车报告列表',
+                ),
+                'name' => 'admin.car.index',
+            ], [
+                'id' => 6,
+                'parent_id' => 4,
+                'icon' => 'contacts',
+                'path' => '/admin/car/create',
+                'meta' => array(
+                    'title' => '汽车报告添加',
+                    'permission' => 'admin.car.create',
+                    'description' => '汽车报告添加',
+                ),
+                'name' => 'admin.car.create',
+            ])
     ],
     [
         'id' => 7,
         'parent_id' => 0,
-        'path' => '/admin/owner',
-        'icon' => 'schedule',
+        'path' => '/admin/charge',
+        'icon' => 'setting',
         'meta' => array(
-            'title' => '业主管理',
-            'permission' => 'admin.owner',
-            'description' => '业主基本信息操作',
+            'title' => '充电桩管理',
+            'permission' => 'admin.charge',
+            'description' => '充电桩报告管理',
         ),
-        'name' => 'admin.owner',
-        'children' => array([
-            'id' => 8,
-            'parent_id' => 7,
-            'icon' => 'link',
-            'path' => '/admin/owner/index',
-            'meta' => array(
-                'title' => '业主列表',
-                'permission' => 'admin.owner.index',
-                'description' => '展示业主基本信息',
-            ),
-            'name' => 'admin.owner.index',
-        ],
-        )
-    ],
-    [
-        'id' => 9,
-        'parent_id' => 0,
-        'path' => '/admin/contract',
-        'icon' => 'wallet',
-        'meta' => array(
-            'title' => '合同管理',
-            'permission' => 'admin.contract',
-            'description' => '合同基本信息操作',
-        ),
-        'name' => 'admin.contract',
+        'name' => 'admin.charge',
         'children' => array(
             [
-                'id' => 10,
-                'parent_id' => 9,
-                'icon' => 'container',
-                'path' => '/admin/contract/create',
+                'id' => 8,
+                'parent_id' => 7,
+                'icon' => 'contacts',
+                'path' => '/admin/charge/index',
                 'meta' => array(
-                    'title' => '录入合同',
-                    'permission' => 'admin.contract.create',
-                    'description' => '录入合同信息',
+                    'title' => '充电桩报告列表',
+                    'permission' => 'admin.charge.index',
+                    'description' => '展示充电桩报告列表',
                 ),
-                'name' => 'admin.contract.create',
-            ],
-            [
-                'id' => 11,
-                'parent_id' => 9,
-                'icon' => 'bars',
-                'path' => '/admin/contract/index',
-                'meta' => array(
-                    'title' => '合同列表',
-                    'permission' => 'admin.contract.index',
-                    'description' => '展示合同列表',
-                ),
-                'name' => 'admin.contract.index',
-            ]
-        )
-    ],
-    [
-        'id' => 12,
-        'parent_id' => 0,
-        'path' => '/admin/financial',
-        'icon' => 'pay-circle',
-        'meta' => array(
-            'title' => '财务管理',
-            'permission' => 'admin.financial',
-            'description' => '合同出入账操作',
-        ),
-        'name' => 'admin.financial',
-        'children' => array(
-            [
-                'id' => 13,
-                'parent_id' => 12,
-                'icon' => 'money-collect',
-                'path' => '/admin/financial/index',
-                'meta' => array(
-                    'title' => '财务管理',
-                    'permission' => 'admin.financial.index',
-                    'description' => '合同出入账操作',
-                ),
-                'name' => 'admin.financial.index',
-            ],
-            [
-                'id' => 14,
-                'parent_id' => 12,
-                'icon' => "history",
-                'path' => '/admin/financial/query',
-                'meta' => array(
-                    'title' => '历史缴费',
-                    'permission' => 'admin.financial.query',
-                    'description' => '历史账目查询',
-                ),
-                'name' => 'admin.financial.query',
-            ],
-        )
+                'name' => 'admin.charge.index',
+            ])
     ],
 
     [
-        'id' => 15,
+        'id' => 9,
         'parent_id' => 0,
         'path' => '/admin/system',
         'icon' => 'setting',
@@ -188,8 +112,8 @@ return [
         'name' => 'admin.system',
         'children' => array(
             [
-                'id' => 16,
-                'parent_id' => 15,
+                'id' => 10,
+                'parent_id' => 9,
                 'icon' => 'contacts',
                 'path' => '/admin/system/roles',
                 'meta' => array(
@@ -200,8 +124,8 @@ return [
                 'name' => 'admin.system.roles',
             ],
             [
-                'id' => 17,
-                'parent_id' => 15,
+                'id' => 11,
+                'parent_id' => 9,
                 'icon' => 'insurance',
                 'path' => '/admin/system/permissions',
                 'meta' => array(
@@ -210,6 +134,29 @@ return [
                     'description' => '初始化权限，全局菜单生成',
                 ),
                 'name' => 'admin.system.permissions',
+            ],
+            [
+                'id' => 12,
+                'parent_id' => 9,
+                'icon' => 'car',
+                'path' => '/admin/system/car',
+                'meta' => array(
+                    'title' => '汽车报告配置',
+                    'permission' => 'admin.system.car',
+                    'description' => '配置汽车报告项目字段',
+                ),
+                'name' => 'admin.system.car',
+            ], [
+                'id' => 13,
+                'parent_id' => 9,
+                'icon' => 'api',
+                'path' => '/admin/system/charge',
+                'meta' => array(
+                    'title' => '充电桩报告配置',
+                    'permission' => 'admin.system.charge',
+                    'description' => '配置充电桩报告项目字段',
+                ),
+                'name' => 'admin.system.charge',
             ])
     ],
 ];

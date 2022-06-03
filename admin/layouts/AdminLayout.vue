@@ -4,7 +4,7 @@
 
     <a-layout-sider v-model="collapsed" collapsible :theme="theme">
       <div style="max-width:200px;text-align: center;padding:20px 0;">
-        <span style="font-size: 18px;text-align: center;color: #f8a326;">楼盘管理系统</span>
+        <span style="font-size: 18px;text-align: center;color: #f8a326;">PDF報表系统</span>
       </div>
       <Menu :menus="menus"></Menu>
     </a-layout-sider>
@@ -55,7 +55,7 @@
         </div>
       </a-layout-content>
       <a-layout-footer style="text-align: center">
-        楼盘管理系统 ©2022 Created by yh
+        PDF報表系统 ©2022 Created by yh
       </a-layout-footer>
       <a-back-top/>
     </a-layout>
@@ -92,11 +92,11 @@ export default {
     this.getCurrentUserPermissions()
     this.saveRole()
     this.getAllRoles()
-    this.$watermark.set(this.user.name + '-' + this.user.mobile.substr(7), this.$refs.content)
+    // this.$watermark.set(this.user.name + '-' + this.user.mobile.substr(7), this.$refs.content)
   },
   //页面卸载时
   beforeDestroy() {
-    this.$watermark.remove(this.id)
+    // this.$watermark.remove(this.id)
     // //离开当前页面时，删除水印
     // this.$router.beforeEach((to, from, next) => {
     //   this.$watermark.remove(id)

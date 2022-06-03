@@ -41,46 +41,4 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function goods()
-    {
-        return $this->belongsToMany(Goods::class, 'goods_user', 'user_id', 'goods_id');
-    }
-
-    public function roles()
-    {
-        return $this->morphToMany(Role::class, 'model', 'model_has_roles');
-    }
-
-    public function bills()
-    {
-        return $this->hasMany(Bill::class);
-    }
-
-    public function owners()
-    {
-        return $this->hasMany(Owner::class);
-    }
-
-    public function contracts()
-    {
-        return $this->hasMany(Contract::class);
-    }
-
-    /**
-     * 是否为超管
-     * @return bool
-     */
-    public function isAdmin()
-    {
-        return $this->id === 1;
-    }
-
-    /**
-     * 是否为财务
-     */
-    public function isFinance()
-    {
-        return $this->hasRole('Finance');
-    }
 }

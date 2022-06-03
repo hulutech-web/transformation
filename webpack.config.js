@@ -8,16 +8,4 @@ module.exports = {
         },
         fallback: {"path": require.resolve("path-browserify")}
     },
-    // 设置代理
-    devServer: {
-        proxy: {
-            '/api': {
-                target: 'http://192.168.2.82:3000/api',
-                changeOrigin: true,
-                pathRewrite: {
-                    '^/api': ''
-                }
-            }
-        }
-    }
 }

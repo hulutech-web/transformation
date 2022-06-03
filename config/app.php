@@ -6,6 +6,8 @@ use App\Services\Menu\MenuFacade;
 use App\Services\Menu\MenuServiceProvider;
 use App\Services\ModifyDoc\ModifyDocFacade;
 use App\Services\ModifyDoc\ModifyDocServiceProvider;
+use App\Services\ModifyExcel\ModifyExcelFacade;
+use App\Services\ModifyExcel\ModifyExcelServiceProvider;
 use App\Services\Permission\PermissionFacade;
 use App\Services\Permission\PermissionServiceProvider;
 use App\Services\Upload\UploadFacade;
@@ -195,6 +197,7 @@ return [
         MenuServiceProvider::class,
         BarCodeServiceProvider::class,
         ModifyDocServiceProvider::class,
+        ModifyExcelServiceProvider::class,
     ],
 
     /*
@@ -255,7 +258,8 @@ return [
         'MenuService' => MenuFacade::class,
         'UUID' => Webpatser\Uuid\Uuid::class,
         'BarCodeService' => BarCodeFacade::class,
-        'ModifyDocService' => ModifyDocFacade::class
+        'ModifyDocService' => ModifyDocFacade::class,
+        'ModifyExcelService' => ModifyExcelFacade::class
     ],
 
 ];

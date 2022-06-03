@@ -87,6 +87,9 @@
           </a-descriptions-item>
         </a-descriptions>
       </a-card>
+      <a-card title="测试">
+        <a-button type="primary" @click="testExcel">测试</a-button>
+      </a-card>
     </div>
 
   </div>
@@ -147,6 +150,9 @@ export default {
           }
         })
       }
+    },
+    async testExcel() {
+      await this.axios.post("admin/excel/test")
     }
   }
 
