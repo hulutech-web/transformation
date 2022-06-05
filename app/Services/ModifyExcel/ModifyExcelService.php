@@ -36,12 +36,12 @@ class ModifyExcelService
          * 1、第一部分（固定部分）
          */
         $sheet->setCellValue('A1', $company_name);
-        $sheet->setCellValue('B3', $report_date);
-        $sheet->setCellValue('E3', $car_number);
-        $sheet->setCellValue('H3', $car_brand);
+        $sheet->setCellValue('B2', $report_date);
+        $sheet->setCellValue('E2', $car_number);
+        $sheet->setCellValue('H2', $car_brand);
 
-        $sheet->setCellValue('B4', $car_type);
-        $sheet->setCellValue('H4', $mileage);
+        $sheet->setCellValue('B3', $car_type);
+        $sheet->setCellValue('H3', $mileage);
         /**
          * END第一部分（固定部分）
          */
@@ -50,7 +50,7 @@ class ModifyExcelService
         /**
          * 2、第二部分（可變部分）
          */
-        $i = 6;
+        $i = 5;
         //獲取$repair_project的長度
         $repair_project_length = count($repair_project);
         //插入$repair_project_length行
@@ -118,16 +118,23 @@ class ModifyExcelService
             $m++;
         }
 
-        $date = date('Y-m-dH:i:s');
+        $date = date('Y-m-d H:i:s');
         // 將修改的數據寫入到指定的文件
         $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
         $filename = 'carReport'.$date;
         $writer->save(public_path('pdf/outputExcel/'.$filename.'.xlsx'));
-        $pdfWriter = new \PhpOffice\PhpSpreadsheet\Writer\Pdf\Dompdf($spreadsheet);
+        // 设置字体为繁体中文
+        $spreadsheet->getDefaultStyle()->getFont()->setName('微軟正黑體');
+        /**
+         * Library    Downloadable from    PhpSpreadsheet writer
+         * TCPDF    https://github.com/tecnickcom/tcpdf	Tcpdf
+         * mPDF    https://github.com/mpdf/mpdf	Mpdf
+         * Dompdf    https://github.com/dompdf/dompdf	Dompdf
+         */
+        $pdfWriter = new \PhpOffice\PhpSpreadsheet\Writer\Pdf\Mpdf($spreadsheet);
         $pdfWriter->save(public_path('pdf/outputPdf/'.$filename.'.pdf'));
 
         //删除清空：
-//        $spreadsheet->disconnectWorksheets();
+        // $spreadsheet->disconnectWorksheets();
     }
-
 }

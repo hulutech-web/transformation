@@ -14,7 +14,6 @@
         </template>
       </a-table>
     </a-card>
-
   </div>
 </template>
 
@@ -62,13 +61,7 @@ const columns = [
     scopedSlots: {customRender: 'repair'},
   },
   {
-    title: '附件',
-    dataIndex: 'attachment',
-    key: 'attachment',
-    scopedSlots: {customRender: 'attachment'},
-  },
-  {
-    title: '操作',
+    title: '查看PDF',
     dataIndex: 'action',
     key: 'action',
     scopedSlots: {customRender: 'action'},
@@ -88,8 +81,8 @@ export default {
     async getCarReports() {
       this.carReports = await this.axios.get('admin/carreport')
     },
-    async exportPdf(record) {
-      await this.axios.post(`admin/carreport/${record.id}/export`, record)
+    exportPdf(record) {
+      window.open(`/carreport/${record.id}/exportpdf`)
     }
   }
 }

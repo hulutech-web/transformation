@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\exportPdfController;
 use Illuminate\Support\Facades\Route;
-
 
 Route::get('/', function () {
 //    return view("app");
@@ -12,3 +12,5 @@ Route::get('/', function () {
 Route::get('{admin}/{path?}', function () {
     return view('admin');
 })->where('admin', 'admin|auth')->where('path', '.*');
+
+Route::get("carreport/{carreport}/exportpdf", [exportPdfController::class, 'exportpdf'])->name('carreport.exportpdf');

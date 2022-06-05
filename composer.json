@@ -18,6 +18,7 @@
         "phpoffice/phpword": "^0.18.3",
         "picqer/php-barcode-generator": "^2.2",
         "spatie/laravel-permission": "^5.5",
+        "tecnickcom/tcpdf": "^6.4",
         "webpatser/laravel-uuid": "^3.0"
     },
     "require-dev": {

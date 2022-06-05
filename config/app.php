@@ -2,6 +2,8 @@
 
 use App\Services\BarCode\BarCodeFacade;
 use App\Services\BarCode\BarCodeServiceProvider;
+use App\Services\Convert\ConvertFacade;
+use App\Services\Convert\ConvertServiceProvider;
 use App\Services\Menu\MenuFacade;
 use App\Services\Menu\MenuServiceProvider;
 use App\Services\ModifyDoc\ModifyDocFacade;
@@ -198,6 +200,7 @@ return [
         BarCodeServiceProvider::class,
         ModifyDocServiceProvider::class,
         ModifyExcelServiceProvider::class,
+        ConvertServiceProvider::class,
     ],
 
     /*
@@ -259,7 +262,8 @@ return [
         'UUID' => Webpatser\Uuid\Uuid::class,
         'BarCodeService' => BarCodeFacade::class,
         'ModifyDocService' => ModifyDocFacade::class,
-        'ModifyExcelService' => ModifyExcelFacade::class
+        'ModifyExcelService' => ModifyExcelFacade::class,
+        'ConvertService' => ConvertFacade::class,
     ],
 
 ];

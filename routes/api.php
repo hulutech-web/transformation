@@ -64,6 +64,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     //生成PDF
     Route::post("admin/carreport/{carreport}/export", [CarReportController::class, 'export']);
+    //转换pdf
+    Route::post("admin/carreport/exportpdf", [CarReportController::class, 'exportpdf']);
+
 });
 
 //-----------------------后台路由END-----------------------

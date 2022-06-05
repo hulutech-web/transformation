@@ -9,7 +9,7 @@ use App\Models\CarReport;
 use Auth;
 use Illuminate\Http\Request;
 use ModifyExcelService;
-
+use ConvertService;
 class CarReportController extends Controller
 {
     /**
@@ -97,4 +97,12 @@ class CarReportController extends Controller
     {
         return ModifyExcelService::handleData($carreport);
     }
+
+//    转换pdf
+    public function exportpdf(Request $request, CarReport $carreport)
+    {
+        return ConvertService::doConvert();
+    }
+
+
 }

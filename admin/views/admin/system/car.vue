@@ -23,7 +23,7 @@
 const fields = [
   {name: 'BrakeFluid', title: '剎車油', options: ['正常', '更換', '建議更換']},
   {name: 'Cooking_oil', title: '軚油', options: ['正常', '更換', '建議更換']},
-  {name: 'OBD', title: 'OBDⅡ電腦', options: ['正常', '更換', '建議更換']},
+  {name: 'OBD', title: 'OBDII電腦', options: ['正常', '更換', '建議更換']},
   {name: 'CheckEngine', title: '檢查引擎', options: ['正常', '更換', '建議更換']},
   {name: 'StartupCondition', title: '車輛啟動狀況', options: ['正常', '更換', '建議更換']},
   {name: 'AllInstrumentsElectric', title: '全車儀錶及電器設施', options: ['正常', '更換', '建議更換']},

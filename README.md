@@ -28,7 +28,9 @@ vue-cropper：图片裁剪
 
 vue-qrcode：二维码生成
 
-vuedraggable：拖拽排序 后端：
+vuedraggable：拖拽排序
+
+后端：
 
 laravel/sanctum：认证
 
@@ -42,4 +44,6 @@ picqer/php-barcode-generator：二维码生成
 
 spatie/laravel-permission：角色权限
 
-webpatser/laravel-uuid：uuid生成器 mpdf/mpdf:pdf渲染庫
+webpatser/laravel-uuid：uuid生成器
+
+mpdf/mpdf:pdf渲染庫
