@@ -1,13 +1,9 @@
 <template>
   <div>
-    <a-card title="系統字段">
+    <a-card title="汽车报告系統字段">
       <a-form>
         <a-form-model-item :label="field.title" v-for="(field,index) in fields" :key="index">
-          <a-radio-group v-model="form[field.name]">
-            <a-radio v-for="(option,index) in options" :key="index">
-              {{ option }}
-            </a-radio>
-          </a-radio-group>
+          <a-tag v-for="(option,index) in options" :key="index">{{ option }}</a-tag>
         </a-form-model-item>
         <a-form-model-item>
           <a-button type="primary" @click="onSubmit">

@@ -96,11 +96,23 @@ return [
                     'description' => '展示充电桩报告列表',
                 ),
                 'name' => 'admin.charge.index',
+            ],
+            [
+                'id' => 9,
+                'parent_id' => 7,
+                'icon' => 'contacts',
+                'path' => '/admin/charge/create',
+                'meta' => array(
+                    'title' => '充電樁报告添加',
+                    'permission' => 'admin.charge.create',
+                    'description' => '充電樁报告添加',
+                ),
+                'name' => 'admin.charge.create',
             ])
     ],
 
     [
-        'id' => 9,
+        'id' => 10,
         'parent_id' => 0,
         'path' => '/admin/system',
         'icon' => 'setting',
@@ -112,8 +124,8 @@ return [
         'name' => 'admin.system',
         'children' => array(
             [
-                'id' => 10,
-                'parent_id' => 9,
+                'id' => 11,
+                'parent_id' => 10,
                 'icon' => 'contacts',
                 'path' => '/admin/system/roles',
                 'meta' => array(
@@ -124,8 +136,8 @@ return [
                 'name' => 'admin.system.roles',
             ],
             [
-                'id' => 11,
-                'parent_id' => 9,
+                'id' => 12,
+                'parent_id' => 10,
                 'icon' => 'insurance',
                 'path' => '/admin/system/permissions',
                 'meta' => array(
@@ -136,23 +148,23 @@ return [
                 'name' => 'admin.system.permissions',
             ],
             [
-                'id' => 12,
-                'parent_id' => 9,
+                'id' => 13,
+                'parent_id' => 10,
                 'icon' => 'car',
                 'path' => '/admin/system/car',
                 'meta' => array(
-                    'title' => '汽车报告配置',
+                    'title' => '汽车檢修功能配置',
                     'permission' => 'admin.system.car',
                     'description' => '配置汽车报告项目字段',
                 ),
                 'name' => 'admin.system.car',
             ], [
-                'id' => 13,
-                'parent_id' => 9,
+                'id' => 14,
+                'parent_id' => 10,
                 'icon' => 'api',
                 'path' => '/admin/system/charge',
                 'meta' => array(
-                    'title' => '充电桩报告配置',
+                    'title' => '充电桩檢修功能配置',
                     'permission' => 'admin.system.charge',
                     'description' => '配置充电桩报告项目字段',
                 ),

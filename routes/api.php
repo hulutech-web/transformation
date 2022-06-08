@@ -4,11 +4,15 @@ use App\Api\AuthController;
 use App\Api\CaptchaController;
 use App\Api\CarReportController;
 use App\Api\CarReportItemController;
+use App\Api\ChargingPileController;
+use App\Api\ChargingReportFieldController;
 use App\Api\HomeController;
 use App\Api\MenuController;
 use App\Api\ModifyExcelController;
+use App\Api\ParkController;
 use App\Api\PermissionController;
 use App\Api\RoleController;
+use App\Api\StallController;
 use App\Api\UploadController;
 use App\Api\UserController;
 use Illuminate\Support\Facades\Route;
@@ -54,6 +58,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     //获取UUID值
     Route::post("admin/home", [HomeController::class, 'index']);
+    Route::post("admin/home/bootstrap", [HomeController::class, 'bootstrap'])->middleware(['system']);
     //测试excel
     Route::post('admin/excel/test', [ModifyExcelController::class, 'testExcel']);
     // 汽車報告選項
@@ -66,6 +71,37 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post("admin/carreport/{carreport}/export", [CarReportController::class, 'export']);
     //转换pdf
     Route::post("admin/carreport/exportpdf", [CarReportController::class, 'exportpdf']);
+
+
+//  停车场
+    Route::apiResource('admin/park', ParkController::class);
+//遠程搜索(停車場)
+    Route::post('admin/park/search', [ParkController::class, 'searchPark']);
+//停車場模板EXCEL批量導入
+    Route::post('import/park', [ParkController::class, 'import']);
+    Route::apiResource('admin/park/{path}/stall', StallController::class);
+//    批量添加停車位
+    Route::post("admin/park/stall/batch", [StallController::class, 'batch']);
+    Route::get('admin/stall', [StallController::class, 'index']);
+    Route::delete('admin/stall/{stall}', [StallController::class, 'destroy']);
+    //    停車位模板EXCEL批量導入
+    Route::post('import/stall', [StallController::class, 'import']);
+
+    //通過park獲取stall
+    Route::post('admin/park/{park}/getstallbypark', [StallController::class, 'getStallByPark']);
+
+//    初始化充电桩字段
+    Route::post('admin/chargingreportfield/init', [ChargingReportFieldController::class, 'init']);
+    Route::post('admin/chargingreportfield/reset', [ChargingReportFieldController::class, 'reset']);
+    Route::post('admin/chargingreportfield/getAllFields', [ChargingReportFieldController::class, 'getAllFields']);
+    //    充電樁模板EXCEL批量導入
+
+    Route::get('admin/chargingpile', [ChargingPileController::class, 'index']);
+    Route::delete('admin/chargingpile/{chargingpile}', [ChargingPileController::class, 'destroy']);
+    Route::post('admin/chargingpile/store', [ChargingPileController::class, 'store']);
+    Route::post('import/chargingpile', [ChargingPileController::class, 'import']);
+//根据stall_id获取到充電樁
+    Route::get('admin/stall/{stall}/getchargingpilebystall', [ChargingPileController::class, 'getChargingPileByStall']);
 
 });
 

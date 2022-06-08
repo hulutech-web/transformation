@@ -2,7 +2,7 @@
 
   <a-layout id="components-layout-demo-side" style="min-height: 100vh">
 
-    <a-layout-sider v-model="collapsed" collapsible :theme="theme">
+    <a-layout-sider v-model="collapsed" collapsible :theme="theme" :trigger="null">
       <div style="max-width:200px;text-align: center;padding:20px 0;">
         <span style="font-size: 18px;text-align: center;color: #f8a326;">PDF報表系统</span>
       </div>
@@ -11,14 +11,24 @@
     <a-layout>
       <!--      id="build"的作用是当页面跳转时scrollTo该位置-->
       <a-layout-header class="ant-pro-global-header" style="background: #fff; padding: 0;" id="build">
+
         <div style="display:flex;justify-content:space-between;padding: 0  24px;">
-          <div @click="fresh" class="icon_hold">
-            <a-icon type="reload" :style="{ fontSize: '20px' }"/>
+
+          <div>
+            <a-icon
+                style="font-size: 18px;color: #f8a326;padding:0 8px;"
+                :type="collapsed ? 'menu-unfold' : 'menu-fold'"
+                @click="() => (collapsed = !collapsed)"
+
+            />
+            <a-icon
+                style="font-size: 18px;color: #f8a326;padding:0 8px;"
+                class="icon_hold" @click="fresh" type="sync"/>
           </div>
           <div>
-            <span style="margin-right:10px;">角色：{{ (role && role.title) ? role.title : '暂无' }}</span>
-            <a-dropdown>
-              <Avatar shape="square" size="large" style="cursor: pointer"
+            <span class="role_holder">角色：{{ (role && role.title) ? role.title : '暂无' }}</span>
+            <a-dropdown :trigger="['click']">
+              <Avatar shape="square" size="large" style="cursor: pointer" @click="e => e.preventDefault()"
                       :style="{ backgroundColor: 'red', verticalAlign: 'middle' }">
                 {{ user.name }}
               </Avatar>
@@ -76,7 +86,6 @@ export default {
       spinning: false,
       collapsed: false,
       menus: [],
-
       permissions: [],
       role: null,
       //当前路由的名字
@@ -188,14 +197,20 @@ export default {
 .icon_hold {
   text-align: center;
   cursor: pointer;
-  height: 64px;
-  width: 64px;
 
   &:hover {
     //    旋转180度
-    transform: rotate(360deg);
+    transform: rotate(180deg);
     //延时1s
     transition: all .5s;
+  }
+}
+
+.role_holder {
+  margin-right: 10px;
+  font-size: .8rem;
+  @media (max-width: 768px) {
+    display: none;
   }
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
   <div class="flex flex-col">
     <div style="display:flex;">
-      <a-input size="large" placeholder="请输入验证码" v-model="content" class="mr-1"></a-input>
-      <img class="captcha" style="height:38px;" :src="captcha.img" @click="get"/>
+      <a-input placeholder="请输入验证码" v-model="content" class="mr-1"></a-input>
+      <img class="captcha" style="height:32px;" :src="captcha.img" @click="get"/>
     </div>
   </div>
 </template>

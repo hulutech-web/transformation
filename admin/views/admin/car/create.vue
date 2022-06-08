@@ -3,36 +3,36 @@
     <a-card title="汽車維修報告">
       <a-form-model ref="ruleForm" :model="form" :rules="rules">
         <a-row :gutter="[16, 16]">
-          <a-col :span="8">
+          <a-col :span="12">
             <a-form-model-item required label="公司名稱" prop="company_name">
               <a-input v-model="form.company_name" placeholder="請輸入公司名稱"/>
             </a-form-model-item>
           </a-col>
-          <a-col :span="8">
+          <a-col :span="12">
             <a-form-model-item label="日期" required prop="report_date">
               <a-date-picker :default-value="moment(new Date().toLocaleDateString(), 'YYYY-MM-DD')"
                              valueFormat="YYYY-MM-DD" v-model="form.report_date" type="date" placeholder="請輸入日期"
                              style="width: 100%;"/>
             </a-form-model-item>
           </a-col>
-          <a-col :span="8">
+          <a-col :span="12">
             <a-form-model-item required label="車牌編號" prop="car_number">
               <a-input v-model="form.car_number" placeholder="請輸入車牌編號"/>
             </a-form-model-item>
           </a-col>
-          <a-col :span="8">
+          <a-col :span="12">
             <a-form-model-item ref="car_type" required label="車型" prop="car_type">
               <a-input v-model="form.car_type"/>
             </a-form-model-item>
           </a-col>
-          <a-col :span="8">
+          <a-col :span="12">
             <a-form-model-item ref="car_brand" required label="汽車品牌" prop="car_brand">
               <a-input v-model="form.car_brand"/>
             </a-form-model-item>
           </a-col>
-          <a-col :span="8">
+          <a-col :span="12">
             <a-form-model-item label="行車公里數" prop="mileage" required>
-              <a-input-number v-model="form.mileage" style="width:100%;"></a-input-number>
+              <a-input-number :min="0" v-model="form.mileage" style="width:100%;"></a-input-number>
             </a-form-model-item>
           </a-col>
         </a-row>
@@ -47,14 +47,14 @@
                   :disabled="form.repair_project.length === 1" @click="removeItem(item)"/>
         </a-form-model-item>
         <a-form-model-item v-bind="formItemLayoutWithOutLabel">
-          <a-button type="dashed" style="width: 40%;" @click="addItem">
+          <a-button type="dashed" style="width: 80%;" @click="addItem">
             <a-icon type="plus"/>
             添加項目
           </a-button>
         </a-form-model-item>
 
         <a-form-model-item label="費用合計" prop="total_cost">
-          <a-input-number v-model="form.total_cost"></a-input-number>
+          <a-input-number :min="0" v-model="form.total_cost"></a-input-number>
         </a-form-model-item>
 
         <a-form-model-item label="內容簡報" prop="content_brief" v-if="carreportItem.length > 0">
@@ -79,9 +79,6 @@
         <a-form-model-item>
           <a-button type="primary" @click="onSubmit">
             添加
-          </a-button>
-          <a-button type="primary" @click="onChange">
-            toPDF
           </a-button>
         </a-form-model-item>
       </a-form-model>
@@ -138,7 +135,8 @@ export default {
           value: ''
         }],
         content_brief: [],
-        attachment: []
+        attachment: [],
+        report_date: moment().format('YYYY-MM-DD'),
       }
     }
   },
@@ -194,9 +192,6 @@ export default {
     changeImages(images) {
       this.form.attachment = images
     },
-    onChange() {
-
-    }
   }
 }
 </script>

@@ -7,9 +7,10 @@ use App\Http\Requests\StoreCarReportRequest;
 use App\Http\Requests\UpdateCarReportRequest;
 use App\Models\CarReport;
 use Auth;
+use ConvertService;
 use Illuminate\Http\Request;
 use ModifyExcelService;
-use ConvertService;
+
 class CarReportController extends Controller
 {
     /**
@@ -19,7 +20,7 @@ class CarReportController extends Controller
      */
     public function index()
     {
-        $carReports = CarReport::all();
+        $carReports = CarReport::paginate(5);
         return $carReports;
     }
 
@@ -82,9 +83,20 @@ class CarReportController extends Controller
      * @param \App\Models\CarReport $carReport
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CarReport $carReport)
+    public function destroy(CarReport $carreport)
     {
-        //
+        /**
+         * 删除$carreport中的attachment中的图片【根据客户需求确定】
+         */
+        $attachment = $carreport->attachment;
+
+        foreach ($attachment as $key => $value) {
+            unlink(public_path().str_replace(env('APP_URL'), '', $value));
+        }
+
+        $carreport->delete();
+
+        return $this->message('删除成功');
     }
 
     public function export(Request $request, CarReport $carreport)

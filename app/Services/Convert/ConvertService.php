@@ -29,7 +29,8 @@ class ConvertService
         $user_id = $carreport->user_id;
         $user = User::find($user_id);
         $user_name = $user->name;
-        $pdf = new \TCPDF();
+//        设置UTF8
+        $pdf = new \TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
         // 设置文档信息
         $pdf->SetCreator('yh');
         $pdf->SetAuthor('yh');
@@ -38,15 +39,15 @@ class ConvertService
         $pdf->SetKeywords('TCPDF, PDF, PHP');
         $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
         // 设置页眉和页脚信息
-        $pdf->SetHeaderData('', 0, env('APP_NAME'), '汽車維修報告', [0, 64, 255], [0, 64, 128]);
+        $pdf->SetHeaderData('', 0, env('APP_NAME'), '汽車檢查保養報告', [0, 64, 255], [0, 64, 128]);
         $pdf->setFooterData([0, 64, 0], [0, 64, 128]);
 
         // 设置页眉和页脚字体
-        $pdf->setHeaderFont(['stsongstdlight', '', '10']);
-        $pdf->setFooterFont(['helvetica', '', '8']);
+        $pdf->setHeaderFont(['droidsansfallback', '', '10']);
+        $pdf->setFooterFont(['droidsansfallback', '', '8']);
 
         // 设置默认等宽字体
-        $pdf->SetDefaultMonospacedFont('courier');
+        $pdf->SetDefaultMonospacedFont('droidsansfallback');
 
         // 设置间距
         $pdf->SetMargins(15, 15, 15);//页面间隔
@@ -58,16 +59,20 @@ class ConvertService
 
         // set default font subsetting mode
         $pdf->setFontSubsetting(true);
-        //设置字体 stsongstdlight支持中文
-        $pdf->SetFont('stsongstdlight', '', 14);
 
+
+        //设置字体 stsongstdlight支持中文(有些浏览器测试不正常，EDGE乱码，firefox正常)
+        $pdf->SetFont('stsongstdlight', '', 12);
+//        $pdf->SetFont('droidsansfallback', '', 20);
+//        获取维修项目数量
+        $repair_project_count = count($repair_project);
         $this->sectionTitle($pdf, $company_name);
         $this->sectionIntro($pdf, $report_date, $car_number, $car_type, $car_brand, $mileage);
         $this->sectionProject($pdf, $repair_project, $total_cost);
         $this->sectionReport($pdf, $content_brief);
-        $pdf->Ln(20);//换行符
+//        $pdf->Ln(20);//换行符
 
-        $this->sectionRemark($pdf, $remark, $user_name);
+        $this->sectionRemark($pdf, $remark, $user_name, $repair_project_count);
 
         $this->sectionImage($pdf, $attachment, $car_brand);
 
@@ -209,8 +214,8 @@ EOF;
 
         $html .= <<<EOF
 <tr>
-<th colspan="7">評估費用合計：</th>
-<th colspan="1">$total_cost</th>
+<th colspan="7" style="text-align: right;">評估費用合計：</th>
+<th colspan="1">MOP$total_cost</th>
 </tr>
 EOF;
         $html .= <<<EOF
@@ -267,8 +272,8 @@ EOF;
 <th width="70">$order</th>
 <th width="330">$content_report_item_title</th>
 <th width="80">☑</th>
-<th width="80">☐</th>
-<th width="80">☐</th>
+<th width="80">□</th>
+<th width="80">□</th>
 </tr>
 EOF;
             } elseif ($content_report_item['value'] === "更換") {
@@ -276,9 +281,9 @@ EOF;
 <tr>
 <th width="70">$order</th>
 <th width="330">$content_report_item_title</th>
-<th width="80">☐</th>
+<th width="80">□</th>
 <th width="80">☑</th>
-<th width="80">☐</th>
+<th width="80">□</th>
 </tr>
 EOF;
             } elseif ($content_report_item['value'] === "建議更換") {
@@ -287,8 +292,8 @@ EOF;
 <tr>
 <th width="70">$order</th>
 <th width="330">$content_report_item_title</th>
-<th width="80">☐</th>
-<th width="80">☐</th>
+<th width="80">□</th>
+<th width="80">□</th>
 <th width="80">☑</th>
 </tr>
 EOF;
@@ -303,11 +308,17 @@ EOF;
 EOF;
         $pdf->writeHTML($html, true, false, true, false, '');
 
+
     }
 
 //    备注部分
-    protected function sectionRemark($pdf, $remark, $user_name)
+    protected function sectionRemark($pdf, $remark, $user_name, $repair_project_count)
     {
+        if ($repair_project_count > 7) {
+            //添加新页面
+            $pdf->AddPage();
+        }
+
         $title = '備 註';
         $html = <<<EOF
 <style>
@@ -328,16 +339,18 @@ EOF;
 EOF;
         $html .= <<<EOF
 <table>
-<tbody style="width:100%;">
+<tbody>
 <tr>
-<th>$title</th>
+<th colspan="8">$title</th>
 </tr>
 <tr>
-<th>$remark</th>
+<th colspan="8">$remark</th>
 </tr>
-<tr  style="float: right;">
-<th style="float: right;"> 維修人員:$user_name</th>
+<tr>
+<td colspan="7" style="text-align: right">維修人員:$user_name</td>
+<td colspan="1"><img src="images/logo.png" width="25" height="25" alt=""></td>
 </tr>
+
 </tbody>
 </table>
 EOF;
@@ -370,29 +383,45 @@ EOF;
 <table>
 <tbody style="width:100%;">
 <tr>
-<th>$title</th>
+<th colspan="2">$title</th>
 </tr>
 EOF;
-//        $pdf->AddPage();
+        //每张图片显示高度
+        $imageHeight = 120;
 
-//       输出图片
         for ($i = 0; $i < count($attachment); $i++) {
             $imgUrl = str_replace(env('APP_URL'), '', $attachment[$i]);
 //            /attachments/202206/wPqKnkbJ1j2q3vNHNHZBGS282PKJZXfyQ1EQ9QC6.jpg
-//            显示图片
-            $html .= <<<EOF
+//            显示图片，每行显示2张图片，每页最多显示10张图片
+            if ($i % 2 == 0) {
+                if ($i == count($attachment) - 1) {
+                    $html .= <<<EOF
 <tr>
-<td><img src="$imgUrl"   height="150"></td>
+<th colspan="1"><img src="$imgUrl"   height="$imageHeight"></th>
 </tr>
 EOF;
+                } else {
+                    $html .= <<<EOF
+<tr>
+<th colspan="1"><img src="$imgUrl"   height="$imageHeight"></th>
+EOF;
+                }
+
+            } else {
+                $html .= <<<EOF
+<th colspan="1"><img src="$imgUrl"   height="$imageHeight"></th>
+</tr>
+EOF;
+            }
+
         }
         $html .= <<<EOF
 </tbody>
 </table>
 
 EOF;
-
         $pdf->writeHTML($html, true, false, true, false, '');
-
     }
+    
+
 }

@@ -6,6 +6,6 @@ module.exports = {
             '#': path.resolve(__dirname, 'admin'),
             'stream': "stream-browserify",
         },
-        fallback: {"path": require.resolve("path-browserify")}
+        fallback: {"path": require.resolve("path-browserify")},
     },
 }

@@ -4,39 +4,39 @@
       <a-row :gutter="[16,16]">
         <a-col :span="4">
           <a-card class="card_center">
-            <section class="dashboard_content">{{ formData.total_build }}</section>
+            <section class="dashboard_content">1</section>
             <p class="dashboard_title">楼盘总数</p>
           </a-card>
         </a-col>
 
         <a-col :span="4">
           <a-card class="card_center">
-            <section class="dashboard_content">{{ formData.total_owner }}</section>
+            <section class="dashboard_content">2</section>
             <p class="dashboard_title">楼盘业主数</p>
           </a-card>
         </a-col>
         <a-col :span="4">
           <a-card class="card_center">
-            <section class="dashboard_content">{{ formData.total_contract }}</section>
+            <section class="dashboard_content">3</section>
             <p class="dashboard_title">合同总数</p>
           </a-card>
         </a-col>
         <a-col :span="4">
           <a-card class="card_center">
-            <section class="dashboard_content">￥{{ formData.total_agency_fee }}</section>
-            <p class="dashboard_title">合同总金额:{{ formData.total_agency_fee |  moneyFormat }}</p>
+            <section class="dashboard_content">￥333333</section>
+            <p class="dashboard_title">合同总金额:333333</p>
           </a-card>
         </a-col>
         <a-col :span="4">
           <a-card class="card_center">
-            <section class="dashboard_content">￥{{ formData.total_one_time_charges }}</section>
-            <p class="dashboard_title">首付费用:{{ formData.total_one_time_charges |moneyFormat }}</p>
+            <section class="dashboard_content">￥3333</section>
+            <p class="dashboard_title">首付费用:333</p>
           </a-card>
         </a-col>
         <a-col :span="4">
           <a-card class="card_center">
-            <section class="dashboard_content">￥{{ formData.total_rest_fee }}</section>
-            <p class="dashboard_title">累计欠款:{{ formData.total_rest_fee | moneyFormat }}</p>
+            <section class="dashboard_content">333</section>
+            <p class="dashboard_title">q24351234</p>
           </a-card>
         </a-col>
       </a-row>
@@ -77,19 +77,17 @@
         <a-descriptions title="其他信息">
 
           <a-descriptions-item label="系统用户">
-            {{ formData.total_user }}名
+            123名
           </a-descriptions-item>
           <a-descriptions-item label="已办理">
-            {{ formData.total_contract }}户
+            123户
           </a-descriptions-item>
           <a-descriptions-item label="待办理">
-            {{ formData.total_todo }}户
+            1321户
           </a-descriptions-item>
         </a-descriptions>
       </a-card>
-      <a-card title="测试">
-        <a-button type="primary" @click="testExcel">测试</a-button>
-      </a-card>
+
     </div>
 
   </div>
@@ -119,7 +117,8 @@ export default {
     }
   },
   created() {
-    this.getData()
+    // this.getData()
+    this.bootstrap()
   },
   methods: {
     async getData() {
@@ -151,8 +150,8 @@ export default {
         })
       }
     },
-    async testExcel() {
-      await this.axios.post("admin/excel/test")
+    async bootstrap() {
+      await this.axios.post('admin/home/bootstrap')
     }
   }
 

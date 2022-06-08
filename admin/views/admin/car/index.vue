@@ -1,8 +1,11 @@
 <template>
   <div>
     <a-card title="報告列表">
+      <template #extra>
+        <a-input-search placeholder="请输入公司关键字" enter-button></a-input-search>
+      </template>
+      <a-table bordered size="small" :pagination="false" :dataSource="carReports.data" rowKey="id" :columns="columns">
 
-      <a-table :dataSource="carReports" rowKey="id" :columns="columns">
         <template slot="repair" slot-scope="text,record">
           <span v-for="(item, index) in record.repair_project" :key="index">{{ item.value }}</span>
         </template>
@@ -10,9 +13,16 @@
           <img alt="" style="width:40px;" v-for="(img, index) in record.attachment" :key="index" :src="img">
         </template>
         <template slot="action" slot-scope="text,record">
-          <a-button type="primary" @click="exportPdf(record)">轉PDF</a-button>
+          <a-button-group>
+            <a-button type="primary" size="small" @click="exportPdf(record)">查看</a-button>
+            <a-button type="danger" size="small" @click="deleteRecord(record)">删除</a-button>
+          </a-button-group>
         </template>
       </a-table>
+      <a-pagination v-if="carReports.total>carReports.per_page" :defaultCurrent='1' :total="carReports.total"
+                    :pageSize="carReports.per_page"
+                    @change="getCarReports">
+      </a-pagination>
     </a-card>
   </div>
 </template>
@@ -23,6 +33,7 @@ const columns = [
     title: '公司名稱',
     dataIndex: 'company_name',
     key: 'company_name',
+    width: 100
   },
   {
     title: '日期',
@@ -43,16 +54,13 @@ const columns = [
     title: '汽車品牌',
     dataIndex: 'car_brand',
     key: 'car_brand',
-  },
-  {
-    title: '行車公里數',
-    dataIndex: 'mileage',
-    key: 'mileage',
+    width: 150,
   },
   {
     title: '費用合計',
     dataIndex: 'total_cost',
     key: 'total_cost',
+    width: 100,
   },
   {
     title: '維修項目',
@@ -61,7 +69,7 @@ const columns = [
     scopedSlots: {customRender: 'repair'},
   },
   {
-    title: '查看PDF',
+    title: '操作',
     dataIndex: 'action',
     key: 'action',
     scopedSlots: {customRender: 'action'},
@@ -78,11 +86,23 @@ export default {
     this.getCarReports()
   },
   methods: {
-    async getCarReports() {
-      this.carReports = await this.axios.get('admin/carreport')
+    async getCarReports(page = 1) {
+      this.carReports = await this.axios.get(`admin/carreport?page=${page}`)
     },
     exportPdf(record) {
       window.open(`/carreport/${record.id}/exportpdf`)
+    },
+    deleteRecord(record) {
+      this.$confirm({
+        title: '确认删除',
+        content: '确认删除该報告吗？',
+        okText: '确认',
+        cancelText: '取消',
+        onOk: async () => {
+          await this.axios.delete(`admin/carreport/${record.id}`)
+          await this.getCarReports()
+        },
+      })
     }
   }
 }

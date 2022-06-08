@@ -12,6 +12,7 @@ import {
     Cascader,
     Checkbox,
     Col,
+    Collapse,
     ConfigProvider,
     DatePicker,
     Descriptions,
@@ -39,6 +40,7 @@ import {
     Spin,
     Steps,
     Table,
+    Tabs,
     Tag,
     TimePicker,
     Tooltip,
@@ -46,7 +48,7 @@ import {
     Upload
 } from 'ant-design-vue'
 
-
+Vue.use(Collapse)
 Vue.use(Layout)
 Vue.use(Input)
 Vue.use(InputNumber)
@@ -87,6 +89,7 @@ Vue.use(Descriptions)
 Vue.use(BackTop)
 Vue.use(VueCropper)
 Vue.use(Tag)
+Vue.use(Tabs)
 Vue.prototype.$confirm = Modal.confirm
 Vue.prototype.$message = message
 Vue.prototype.$notification = notification

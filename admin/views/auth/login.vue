@@ -1,15 +1,15 @@
 <template>
   <div class="main">
     <div>
-      <p style="text-align: center;font-size: 1.5rem;">楼盘管理系统</p>
+      <p style="text-align: center;font-size: 1.5rem;">PDF報表管理系统</p>
       <a-form>
         <a-form-item>
-          <a-input size="large" v-model="form.mobile" placeholder="手机号">
+          <a-input v-model="form.mobile" placeholder="手机号">
             <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)"/>
           </a-input>
         </a-form-item>
         <a-form-item>
-          <a-input size="large" v-model="form.password" type="password" placeholder="密码">
+          <a-input v-model="form.password" type="password" placeholder="密码">
             <a-icon slot="prefix" type="lock" style="color:rgba(0,0,0,.25)"/>
           </a-input>
         </a-form-item>
