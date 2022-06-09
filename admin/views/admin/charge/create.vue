@@ -5,11 +5,11 @@
         <a href="/files/stalltemplate.xlsx">模板下載</a>
         <a-button-group>
           <ImportFile :action="ChargingReportUrl"/>
-          <a-button type="primary" @click="addChargingReportForm" :disabled="chargingReportForm.stalls.length>2">
+          <a-button type="primary" @click="addChargingReportStall" :disabled="stalls.length>=8">
             <a-icon type="plus"/>
             添加
           </a-button>
-          <a-button type="danger" @click="delChargingReportForm" :disabled="chargingReportForm.stalls.length<2">
+          <a-button type="danger" @click="delChargingReportStall" :disabled="stalls.length<2">
             刪除
             <a-icon type="minus"/>
           </a-button>
@@ -31,47 +31,52 @@
 
         </a-form-model-item>
         <a-row :gutter="[16,16]">
-          <a-col :span="6" v-for="(stallItem,index) in chargingReportForm.stalls" :key="index">
 
-            <a-form-model-item label="停車場車位號" prop="stalls">
-              <a-select :value="stallValue" @change="handleChange">
-                <a-select-option v-for="(stall,index) in stallOptions" :key="index">{{ stall.number }}</a-select-option>
-              </a-select>
-            </a-form-model-item>
+          <a-col :span="6" v-for="(stallItem,index) in stalls" :key="index">
+            <div style="border: #8c939d 1px dotted;padding:10px;" @click="locationPoint(index)">
+              <a-tag color="#f50">
+                #{{ index + 1 }}
+              </a-tag>
+              <a-form-model-item label="停車場車位號" prop="stalls">
+                <a-select @change="handleChange">
+                  <a-select-option v-for="(stall) in stallOptions" :key="stall.id"
+                                   :disabled="ChargingPiles.some(item=>item.id==stall.id)">
+                    {{ stall.number }}
+                  </a-select-option>
+                </a-select>
+              </a-form-model-item>
 
-
-            <a-form-model-item label="设备信息" prop="charging_pile_id">
-              <a-card>
-                <a-descriptions size="small">
-                  <a-descriptions-item :label="name" v-for="(value, name) in  ChargingPile" :key="name">
-                    {{ value }}
+              <a-form-model-item label="设备信息" prop="charging_pile_id">
+                <a-descriptions size="small" layout="vertical" bordered :column="4">
+                  <a-descriptions-item :label="name" v-for="(value, name) in  ChargingPiles[index]"
+                                       :key="name">
+                    <span style="font-size: .6rem;">{{ value }}</span>
                   </a-descriptions-item>
                 </a-descriptions>
-              </a-card>
 
-            </a-form-model-item>
-            <a-collapse>
-              <a-collapse-panel key="1" header="報告詳情">
-                <a-form-model-item label="報告內容" prop="result">
-                  <div v-for="(item, ind) in chargingFields" :key="ind" class="list">
-                    <span style="padding-left:10px;">{{ item.field_id }}:{{ item.field_name }}</span>
+              </a-form-model-item>
+              <a-collapse>
+                <a-collapse-panel key="1" header="報告詳情">
+                  <a-form-model-item label="報告內容" prop="result">
+                    <div v-for="(item, ind) in chargingFields" :key="ind" class="list">
+                      <span style="padding-left:10px;">{{ item.field_id }}:{{ item.field_name }}</span>
 
-                    <div v-for="(sub,index) in item.field_options" :key="index">
-                      <span>{{ sub.field_id }}:{{ sub.field_name }}</span>
-                      <a-radio-group class="list_group"
-                                     v-if="chargingReportForm.result.length > 0"
-                                     v-model="chargingReportForm.result[ind].field_options[index].value">
-                        <a-radio value="P">P</a-radio>
-                        <a-radio value="F">F</a-radio>
-                        <a-radio value="N">N</a-radio>
-                      </a-radio-group>
+                      <div v-for="(sub,index) in item.field_options" :key="index">
+                        <span>{{ sub.field_id }}:{{ sub.field_name }}</span>
+                        <a-radio-group class="list_group"
+                                       v-if="chargingReportForm.result.length > 0"
+                                       v-model="chargingReportForm.result[ind].field_options[index].value">
+                          <a-radio value="P">P</a-radio>
+                          <a-radio value="F">F</a-radio>
+                          <a-radio value="N">N</a-radio>
+                        </a-radio-group>
+                      </div>
+
                     </div>
-
-                  </div>
-                </a-form-model-item>
-              </a-collapse-panel>
-            </a-collapse>
-
+                  </a-form-model-item>
+                </a-collapse-panel>
+              </a-collapse>
+            </div>
 
           </a-col>
         </a-row>
@@ -91,7 +96,6 @@
 import Search from "#/components/RemoteSearch";
 import ImportFile from "#/components/ImportFile";
 // lodash.cloneDeep(objects)
-import cloneDeep from "lodash/cloneDeep";
 import moment from 'moment'
 
 const chargingReportColumns = [
@@ -118,27 +122,36 @@ export default {
       chargingReportRules,
       chargingFields: [],
       stallValue: '',
-      chargingReportForm:
-          {
-            report_date: moment(new Date().toLocaleDateString(), 'YYYY-MM-DD'),
-            park_id: '',
-            park_name: '',
-            stalls: [
-              {
-                number: '',
-                location: '',
-              }
-            ],
-            charging_pile_id: '',
-            charging_results: [],
-            user_id: JSON.parse(localStorage.getItem('user'))['id'],
-            remark: '',
-            result: []
-          },
-      ChargingPile: {},
+      locationId: 0,//從0開始
+      chargingReportForm: {
+        report_date: moment(new Date().toLocaleDateString(), 'YYYY-MM-DD'),
+        park_id: '',
+        park_name: '',
+        stalls: [],
+        charging_pile_id: '',
+        charging_results: [],
+        user_id: JSON.parse(localStorage.getItem('user'))['id'],
+        remark: '',
+        result: []
+      },
+      stalls: [
+        {
+          id: '',
+          number: '',
+          location: '',
+        }
+      ],
+      ChargingPiles: [
+        {
+          id: '',
+          device_id: '',
+          brand: '',
+          model: '',
+        }
+      ],
+      results: [],
       ChargingReportUrl: `http://${window.location.hostname}/api/import/park`,
       parkUrl: `http://${window.location.hostname}/api/import/park`,
-      parkKeyword: '',
       stallOptions: [],
     }
   },
@@ -146,7 +159,7 @@ export default {
     'chargingReportForm.park_id'(n) {
       this.getStallByParkId(n)
     },
-    'chargingReportForm.stall_id'(n) {
+    'helpStallId'(n) {
       this.getChargingPileByStallId(n)
     },
   },
@@ -156,40 +169,53 @@ export default {
   methods: {
     async getAllChargingFields() {
       this.chargingFields = await this.axios.post('admin/chargingreportfield/getAllFields')
-
     },
-    async getChargingPileByStallId(stall_id) {
-      this.ChargingPile = await this.axios.get(`admin/stall/${stall_id}/getchargingpilebystall`)
+    getChargingPileByStallId(stall_id) {
+      return this.axios.get(`admin/stall/${stall_id}/getchargingpilebystall`)
     },
-    handleChange(index) {
-      console.log(index)
-      this.chargingReportForm.stalls[0].number = this.stallOptions[index].number
-      this.chargingReportForm.stalls[0].location = this.stallOptions[index].location
+    async handleChange(data) {
+      //需要觸發查找事件，獲取充電樁信息
+      let stall_id = this.stallOptions[data - 1].id
+      let res = await this.getChargingPileByStallId(stall_id)
+      Object.assign(this.ChargingPiles[this.locationId], {
+        id: res.id,
+        device_id: res.device_id,
+        brand: res.brand,
+        model: res.model,
+      })
     },
     async getStallByParkId(park_id) {
       this.stallOptions = await this.axios.post(`admin/park/${park_id}/getstallbypark`)
     },
     changeValue(data) {
-      // 只是為了顯示搜索框的值
-      console.log(data)
+      // 停車場選擇事件，只是為了顯示搜索框的值
       const {value, form} = data
       this.chargingReportForm.park_id = value.id
       this.chargingReportForm.park_name = value.name
     },
-    addChargingReportForm() {
-      if (this.chargingReportArr.length >= 3) {
-        this.$message.error('最多只能添加三个停车场')
-        return
-      }
-      let form = cloneDeep(this.chargingReportArr[0])
-      this.chargingReportArr.push(form)
+    addChargingReportStall() {
+      this.stalls.push({
+        number: '',
+        location: '',
+      })
+      this.ChargingPiles.push({
+        id: '',
+        device_id: '',
+        brand: '',
+        model: '',
+      })
     },
-    delChargingReportForm() {
-      this.chargingReportArr.pop()
+    delChargingReportStall() {
+      this.stalls.pop()
+      // this.chargingReportForm.stalls.pop()
     },
     onSubmit() {
       console.log()
       // console.log(this.chargingReportForm)
+    },
+    //輔助函數，幫助定位當前選擇的是第幾個
+    locationPoint(index) {
+      this.locationId = index
     }
   }
 }
