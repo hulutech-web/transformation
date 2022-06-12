@@ -176,7 +176,7 @@ EOF;
             $model = collect($chargingPiles[$i])->get('model');
             $stall_id = collect($chargingPiles[$i])->get('stall_id');
             $stall_number = Stall::find($stall_id)->number;
-            if (($i + 1) % 5 == 1) {
+            if ($i % 5 == 0) {
                 //充电桩信息，每5个为一组，如果是5的倍数，渲染表头
                 $html .= <<<EOF
 <table>
@@ -285,7 +285,7 @@ EOF;
 <table>
 <tbody>
 <tr>
-<th colspan="1" style="font-size: .7em;background-color:#60A5FA;color:white;">$outer_field_id $key</th>
+<th colspan="1" style="font-size: .7em;background-color:#60A5FA;color:white;">$outer_field_id</th>
 <th colspan="5"  style="font-size: .7em;background-color:#60A5FA;color:white;">$outer_field_name</th>
 <th colspan="5" style="font-size: .7em;background-color:#60A5FA;color:white;"></th>
 </tr>
@@ -314,25 +314,44 @@ EOF;
                                 });
 
                                 $formatData = $this->formatDisplayData($resData);
+                                collect($formatData[$key])->map(function ($showData) use (&$html) {
+                                    $showData_id = $showData['field_id'];
+                                    $showData_title = $showData['field_name'];
+                                    $showData_value = implode(" ", $showData['value']);
+                                    $html .= <<<EOF
+
+<table>
+<tbody>
+<tr>
+<th colspan="1" style="font-size: .7em;">$showData_id</th>
+<th colspan="5"  style="font-size: .7em;">$showData_title</th>
+<th colspan="5" style="font-size: .7em;">$showData_value</th>
+</tr>
+</tbody>
+</table>
+EOF;
 
 
-                            });
+                                });
+
+                            }
+                            );
 
                         }
-
                     }
                 }
+
+
             }
-
-
-            $pdf->writeHTML($html, true, false, true, false, "");
-
         }
+        //这一行始终放在最后
+        $pdf->writeHTML($html, true, false, true, false, "");
     }
 
 //如果有$html参数时。执行连接。如果没有执行新建
 
-    public function showStyle($html)
+    public
+    function showStyle($html)
     {
         if ($html) {
             $html .= <<<EOF
@@ -376,7 +395,8 @@ EOF;
     }
 
 //帮助函数，将数组分段成二维数组
-    protected function makeArray($length, $chunk)
+    protected
+    function makeArray($length, $chunk)
     {
         $array = array();
         for ($i = 0; $i < $length; $i++) {
@@ -402,7 +422,8 @@ EOF;
 //]
 
 //格式化显示数据，使其结果横向分布排列
-    protected function formatDisplayData($data, $chuckNumber = 0)
+    protected
+    function formatDisplayData($data, $chuckNumber = 0)
     {
 
 //        获取ChargingReportField中的field_options列
