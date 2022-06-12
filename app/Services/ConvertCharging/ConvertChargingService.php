@@ -167,22 +167,24 @@ EOF;
 //        获取报告选项
         $resultOptions = include config_path()."/chargeFields.php";
         $html = $this->showStyle(null);
-        for ($i = 0; $i < $pileLength; $i++) {
+        $resultLength = count($chargingResults);
+        if ($pileLength >= 5) {
+            for ($i = 0; $i < $pileLength; $i++) {
 //#region第一部分：获取参数
-            //序号
-            $model_id = collect($chargingPiles[$i])->get('id');
-            $device_id = collect($chargingPiles[$i])->get('device_id');
-            $brand = collect($chargingPiles[$i])->get('brand');
-            $model = collect($chargingPiles[$i])->get('model');
-            $stall_id = collect($chargingPiles[$i])->get('stall_id');
-            $stall_number = Stall::find($stall_id)->number;
-            if ($i % 5 == 0) {
-                //充电桩信息，每5个为一组，如果是5的倍数，渲染表头
-                if ($i != 0) {
+                //序号
+                $model_id = collect($chargingPiles[$i])->get('id');
+                $device_id = collect($chargingPiles[$i])->get('device_id');
+                $brand = collect($chargingPiles[$i])->get('brand');
+                $model = collect($chargingPiles[$i])->get('model');
+                $stall_id = collect($chargingPiles[$i])->get('stall_id');
+                $stall_number = Stall::find($stall_id)->number;
+                if ($i % 5 == 0) {
+                    //充电桩信息，每5个为一组，如果是5的倍数，渲染表头
+                    if ($i != 0) {
 //                    留出部分空白
-                    $html .= '<div style="page-break-after: always;"></div>';
-                }
-                $html .= <<<EOF
+                        $html .= '<div style="page-break-after: always;"></div>';
+                    }
+                    $html .= <<<EOF
 <table>
 <tbody>
 <tr>
@@ -202,10 +204,10 @@ EOF;
 </table>
 </tbody>
 EOF;
-            }
+                }
 
-            //充电桩信息，每5个为一组，如果是5的倍数，表示为内容行，直接渲染
-            $html .= <<<EOF
+                //充电桩信息，每5个为一组，如果是5的倍数，表示为内容行，直接渲染
+                $html .= <<<EOF
 <table>
 <tbody>
 <tr>
@@ -229,10 +231,9 @@ EOF;
 //===========================================================
 
 
-            $resultLength = count($chargingResults);
 //如果是5的倍数，说明当前组已经渲染完成，接下来渲染充电桩报告内容，因报告数量与充电桩数量一致，排除最后一组为5的倍数，
 //而是数据相同时直接渲染，这样可以包含多个5的倍数，最后一组始终会显示
-            if ($pileLength >= 5) {
+
                 if (($i + 1) % 5 == 0 || $i == $pileLength - 1) {
                     //获取充电桩长度，当长度是5的倍数时，渲染表头，否则直接渲染内容
                     for ($j = 0; $j < $resultLength; $j++) {
@@ -373,13 +374,78 @@ EOF;
                 }
 
 
-            } else {
-                for ($j = 0; $j < $resultLength; $j++) {
+            }
+
+        } else {
+            for ($i = 0; $i < $pileLength; $i++) {
+//#region第一部分：获取参数
+                //序号
+                $model_id = collect($chargingPiles[$i])->get('id');
+                $device_id = collect($chargingPiles[$i])->get('device_id');
+                $brand = collect($chargingPiles[$i])->get('brand');
+                $model = collect($chargingPiles[$i])->get('model');
+                $stall_id = collect($chargingPiles[$i])->get('stall_id');
+                $stall_number = Stall::find($stall_id)->number;
+                if ($i == 0) {
+
+                    $html .= <<<EOF
+<table>
+<tbody>
+<tr>
+<th  style="text-align: left;font-size: 0.6em;background-color:#60A5FA;color:white;">模型ID
+</th>
+<th style="text-align: left;font-size: 0.6em;background-color:#60A5FA;color:white;">充電站ID
+</th>
+<th style="text-align: left;font-size: 0.6em;background-color:#60A5FA;color:white;">品牌
+</th>
+<th style="text-align: left;font-size: 0.6em;background-color:#60A5FA;color:white;">型號
+</th>
+
+<th  style="text-align: left;font-size: 0.6em;background-color:#60A5FA;color:white;">車位編號
+</th>
+
+</tr>
+</table>
+</tbody>
+EOF;
+                }
+
+                //充电桩信息，每5个为一组，如果是5的倍数，表示为内容行，直接渲染
+                $html .= <<<EOF
+<table>
+<tbody>
+<tr>
+<th  style="text-align: left;font-size: 0.6em;">
+$model_id
+</th>
+<th style="text-align: left;font-size: 0.6em;">$device_id
+</th>
+<th style="text-align: left;font-size: 0.6em;">$brand
+</th>
+<th style="text-align: left;font-size: 0.6em;">$model
+</th>
+
+<th  style="text-align: left;font-size: 0.6em;">$stall_number
+</th>
+</tr>
+</table>
+</tbody>
+EOF;
+//#endregion end第一部分END：获取参数
+//===========================================================
+
+
+//如果是5的倍数，说明当前组已经渲染完成，接下来渲染充电桩报告内容，因报告数量与充电桩数量一致，排除最后一组为5的倍数，
+//而是数据相同时直接渲染，这样可以包含多个5的倍数，最后一组始终会显示
+
+                if ($i == $pileLength - 1) {
+                    //获取充电桩长度，当长度是5的倍数时，渲染表头，否则直接渲染内容
+                    for ($j = 0; $j < $resultLength; $j++) {
 //+++++++++++++++++++++++++++++++
 
-//                        第二部分：只执行一次，渲染报告的标题
-                    if ($i == $pileLength - 1) {
-                        $html .= <<<EOF
+                        if ($j == 0) {
+//                        第二部分：报告详情标题部分P\F\N
+                            $html .= <<<EOF
 <table>
 <tbody>
 <tr>
@@ -400,30 +466,31 @@ EOF;
 //                        结果的列数，是根据当前组的充电桩数量来计算的，当前判断条件已经是5的倍数，则开始循环渲染
 //                        要去匹配充电桩的ID号，如果相同，则渲染，如果不同，则跳过
 
-                        for ($t = 0; $t < count($chargingResults); $t++) {
-                            $charging_pile_id = collect(collect($chargingResults[$t])->get('result'))->get('device_id');
-                            $html .= <<<EOF
+                            for ($t = $range[$curGroup][0]; $t <= $range[$curGroup][count($range[$curGroup]) - 1]; $t++) {
+                                $charging_pile_id = collect(collect($chargingResults[$t])->get('result'))->get('device_id');
+                                $html .= <<<EOF
     <td colspan="1">
     <span style="font-size: .7em;text-align: center;"> $charging_pile_id</span>
     </td>
 EOF;
-                        }
-                        $html .= <<<EOF
+                            }
+
+                            $html .= <<<EOF
   </tr>
 </tbody>
 </table>
 EOF;
 //=========================================
-                        $curGroup++;
+                            $curGroup++;
 //                        获取充电桩内容信息，渲染内容信息。（报告的选项固定的）
 //从配置文件中读取选项（$resultOptions）避免多次引入，提高效率
 //                        读取配置项
 
-                        collect($resultOptions)->each(function ($resultOption, $key) use (&$html, $range, $curGroup, $j, $chargingResults, $chargingPiles, $model_id) {
-                            $outer_field_id = $resultOption['field_id'];
-                            $outer_field_name = $resultOption['field_name'];
+                            collect($resultOptions)->each(function ($resultOption, $key) use (&$html, $range, $curGroup, $j, $chargingResults, $chargingPiles, $model_id) {
+                                $outer_field_id = $resultOption['field_id'];
+                                $outer_field_name = $resultOption['field_name'];
 //                            分组分割标题
-                            $html .= <<<EOF
+                                $html .= <<<EOF
 <table>
 <tbody>
 <tr>
@@ -437,36 +504,36 @@ EOF;
 EOF;
 
 //$chargingPiles中有一个model_id，对应充电桩的ID号，为保证顺序一致，用model_id来查找充电桩报告结果
-                            //因报告结果是横向排列，定义一个数组，用来存储每一个充电桩的报告结果
-                            $pileLength = count($chargingPiles);
+                                //因报告结果是横向排列，定义一个数组，用来存储每一个充电桩的报告结果
+                                $pileLength = count($chargingPiles);
 
-                            $resData = [];
-                            for ($i = 0; $i < $pileLength; $i++) {
-                                collect($chargingResults)->each(function ($chargingResult) use ($chargingPiles, $range, $curGroup, $i, &$resData) {
-                                    if ($chargingResult['charging_pile_id'] == $chargingPiles[$i]['id']) {
-                                        $charging_result = collect(collect($chargingResult)->get('result'))->get('resultData');
-                                        $res = collect($charging_result)->map(function ($item) {
-                                            return collect(collect($item)->get('field_options'))->map(function ($f) {
-                                                return [
-                                                    'afield_id' => $f['field_id'],
-                                                    'afield_name' => $f['field_name'],
-                                                    'avalue' => $f['value'],
-                                                ];
+                                $resData = [];
+                                for ($i = 0; $i < $pileLength; $i++) {
+                                    collect($chargingResults)->each(function ($chargingResult) use ($chargingPiles, $range, $curGroup, $i, &$resData) {
+                                        if ($chargingResult['charging_pile_id'] == $chargingPiles[$i]['id']) {
+                                            $charging_result = collect(collect($chargingResult)->get('result'))->get('resultData');
+                                            $res = collect($charging_result)->map(function ($item) {
+                                                return collect(collect($item)->get('field_options'))->map(function ($f) {
+                                                    return [
+                                                        'afield_id' => $f['field_id'],
+                                                        'afield_name' => $f['field_name'],
+                                                        'avalue' => $f['value'],
+                                                    ];
+                                                });
                                             });
-                                        });
-                                        array_push($resData, $res);
-                                    }
-                                });
-                            }
+                                            array_push($resData, $res);
+                                        }
+                                    });
+                                }
 
-                            $formatData = $this->formatDisplayData($resData, 5);
+                                $formatData = $this->formatDisplayData($resData, 5);
 
-                            collect($formatData[$key])->map(function ($showData) use (&$html, $range, $curGroup) {
-                                $showData_id = $showData['field_id'];
-                                $showData_title = $showData['field_name'];
+                                collect($formatData[$key])->map(function ($showData) use (&$html, $range, $curGroup) {
+                                    $showData_id = $showData['field_id'];
+                                    $showData_title = $showData['field_name'];
 //$showData['value']中的数组合并为字符串
 
-                                $html .= <<<EOF
+                                    $html .= <<<EOF
 <table>
 <tbody>
 <tr>
@@ -475,36 +542,47 @@ EOF;
 
 EOF;
 
-                                $showData_value_array = $showData['value'];
+                                    $showData_value_array = $showData['value'];
 
-                                for ($x = 0; $x < count($showData_value_array); $x++) {
-                                    $overValue = $showData_value_array[$x];
+                                    $Arange = $this->makeArray(count($showData_value_array), 5);
+//                                    [0-4][5,10]
 
-                                    $html .= <<<EOF
+                                    for ($x = $Arange[$curGroup - 1][0]; $x <= $Arange[$curGroup - 1][count($Arange[$curGroup - 1]) - 1]; $x++) {
+                                        $arrLength = count($Arange[$curGroup - 1]);
+                                        $overValue = $showData_value_array[$x];
+
+
+                                        $html .= <<<EOF
 <th colspan="1"  style="font-size: .7em;">$overValue</th>
 EOF;
-                                    //始终保持有5个单元格，如果有多余的单元格，则填充空白
+                                        //始终保持有5个单元格，如果有多余的单元格，则填充空白
 
 
-                                }
+                                    }
 //=======================================================
 
-                                $html .= <<<EOF
+                                    $html .= <<<EOF
 </tr>
 </tbody>
 </table>
 EOF;
 
 
-                            });
+                                });
+
+                            }
+                            );
 
                         }
-                        );
-
                     }
                 }
+
+
             }
+
         }
+
+
         //这一行始终放在最后
 
         $pdf->writeHTML($html, true, false, true, false, "");
