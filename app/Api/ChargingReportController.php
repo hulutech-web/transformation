@@ -106,8 +106,7 @@ class ChargingReportController extends Controller
             });
         }
 
-        $resArray = $this->formatDisplayData($resData, 5);
-        return $resArray[0];
+        return $this->formatDisplayData($resData, 5);
     }
 
     protected function makeArray($length, $chunk)
@@ -123,7 +122,7 @@ class ChargingReportController extends Controller
 
     protected function formatDisplayData($data, $chuckNumber)
     {
-
+        
 //        获取ChargingReportField中的field_options列
         $dataTemplate = ChargingReportField::all()->pluck('field_options')->toArray();
         $modelArray = collect($dataTemplate)->flatMap(function ($item) {
