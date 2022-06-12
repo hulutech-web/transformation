@@ -153,7 +153,7 @@ EOF;
     /**
      * 設置內容區域
      */
-
+//添加8份有问题，数据有问题
     public function setContentSection($pdf, $chargingResults, $chargingPiles)
     {
         //构造范围数组，每组5个[【0-4】,【5-9】,【10-14】。。。]
