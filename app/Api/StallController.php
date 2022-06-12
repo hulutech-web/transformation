@@ -105,10 +105,12 @@ class StallController extends Controller
     {
         $arrForm = $request->arrForm;
         collect($arrForm)->each(function ($item) {
-            $stall = new Stall();
-            $stall->park_id = $item['park_id'];
-            $stall->number = $item['number'];
-            $stall->location = $item['location'];
+            $pack = Park::find($item['park_id']);
+            $stall = $pack->stalls()->create([
+                'number' => $item['number'],
+                'location' => $item['location'],
+                'park_id' => $item['park_id'],
+            ]);
             $stall->save();
         });
         return $this->message('批量添加成功');

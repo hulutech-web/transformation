@@ -101,7 +101,10 @@ export default {
     submitParkPile() {
       this.$refs.chargingPileForm.validate(async (valid) => {
         if (valid) {
-          await this.axios.post('admin/chargingpile/store', this.chargingPileForm)
+          await this.axios.post('admin/chargingpile/store', this.chargingPileForm).then(_=>{
+          //  清空表单
+            this.$refs['chargingPileForm'].resetFields();
+          })
         }
       })
     },

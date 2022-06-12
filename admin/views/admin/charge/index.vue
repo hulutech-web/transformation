@@ -13,10 +13,11 @@
             <a-button type="primary" @click="test(record)">测试collect</a-button>
           </a-button-group>
         </template>
-        <template slot="stall" slot-scope="text,record">
-        <span v-for="(item,index) in record.stalls" :key="index">
-        <a-tag>{{ item }}</a-tag>
-        </span>
+        <template slot="park" slot-scope="text,record">
+          {{ record.park.name }}
+        </template>
+        <template slot="user" slot-scope="text,record">
+          {{ record.user.name }}
         </template>
         <template slot="chargingPiles" slot-scope="text,record">
         <span v-for="(item,index) in record.chargingPiles" :key="index">
@@ -51,24 +52,10 @@ const columns = [
     align: 'center'
   },
   {
-    title: '停車場ID',
-    dataIndex: 'park_id',
-    key: 'park_id',
-    width: 100,
-  },
-  {
-    title: '充电桩',
-    dataIndex: 'chargingPiles',
-    key: 'chargingPiles',
-    align: 'center',
-    scopedSlots: {customRender: 'chargingPiles'}
-  },
-  {
-    title: '停車位编号',
-    dataIndex: 'stalls',
-    key: 'stalls',
-    align: 'center',
-    scopedSlots: {customRender: 'stall'}
+    title: '停車場',
+    dataIndex: 'park_name',
+    key: 'park_name',
+    scopedSlots: {customRender: 'park'},
   },
   {
     title: '備註',
@@ -78,11 +65,13 @@ const columns = [
     align: 'center'
   },
   {
-    title: '用戶ID',
+    title: '填報人用戶',
     dataIndex: 'user_id',
     key: 'user_id',
     width: 200,
-    align: 'center'
+    align: 'center',
+    scopedSlots: {customRender: 'user'},
+
   },
   {
     title: '操作',

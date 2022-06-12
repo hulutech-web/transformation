@@ -18,6 +18,9 @@ class ChargingReportController extends Controller
 
     public function index()
     {
+//        獲取停車場名稱並一同返回
+
+        return ChargingReport::with('park')->with('user')->orderBy('created_at', 'desc')->paginate(5);
         //資源分頁返回,默認分頁
         return ChargingReportResource::collection(ChargingReport::paginate(5));
     }
@@ -81,6 +84,8 @@ class ChargingReportController extends Controller
 
     public function test(Request $request, ChargingReport $chargingreport)
     {
+
+        return $this->makeArray(12, 5);
         $chargingResource = new ChargingReportResource($chargingreport);
         $chargingResults = collect($chargingResource)->get('chargingResults');
 
@@ -122,7 +127,7 @@ class ChargingReportController extends Controller
 
     protected function formatDisplayData($data, $chuckNumber)
     {
-        
+
 //        获取ChargingReportField中的field_options列
         $dataTemplate = ChargingReportField::all()->pluck('field_options')->toArray();
         $modelArray = collect($dataTemplate)->flatMap(function ($item) {

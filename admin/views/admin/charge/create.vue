@@ -5,7 +5,7 @@
         <a href="/files/stalltemplate.xlsx">模板下載</a>
         <a-button-group>
           <ImportFile :action="ChargingReportUrl"/>
-          <a-button type="primary" @click="addChargingReportStall" :disabled="stalls.length>=8">
+          <a-button type="primary" @click="addChargingReportStall" :disabled="stalls.length>=50">
             <a-icon type="plus"/>
             添加
           </a-button>
@@ -177,7 +177,10 @@ export default {
     },
     async handleChange(data) {
       //需要觸發查找事件，獲取充電樁信息
-      let stall_id = this.stallOptions[data - 1].id
+      //得到的是94，為該設備ID
+      console.log(data)
+      // return
+      let stall_id = data
       let res = await this.getChargingPileByStallId(stall_id)
       Object.assign(this.ChargingPiles[this.locationId], {
         id: res.id,//充電樁ID

@@ -41,7 +41,10 @@ class ChargingPileController extends Controller
      */
     public function store(StoreChargingPileRequest $request)
     {
-        $chargingPile = ChargingPile::create($request->input());
+        //关联创建
+        $stall = Stall::find($request->stall_id);
+        $chargingPile = $stall->chargingPile()->create($request->input());
+//        $chargingPile = ChargingPile::create($request->input());
         return $this->message('新增成功', $chargingPile);
     }
 
