@@ -60,7 +60,7 @@
               <a-col :span="6">
                 <a-form-model ref="rulestallForm" :model="arrForm" required :rules="stallRules" layout="inline">
 
-                  <a-form-model-item label="停車場" prop="park_id">
+                  <a-form-model-item label="停車場（搜索）" prop="park_id">
                     <Search :value="arrForm.keywords" :searchForm="arrForm" @changeValue="changeValue"/>
                   </a-form-model-item>
                   <a-form-model-item label="車位編號" prop="number">

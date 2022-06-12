@@ -5,6 +5,7 @@ use App\Api\CaptchaController;
 use App\Api\CarReportController;
 use App\Api\CarReportItemController;
 use App\Api\ChargingPileController;
+use App\Api\ChargingReportController;
 use App\Api\ChargingReportFieldController;
 use App\Api\HomeController;
 use App\Api\MenuController;
@@ -103,6 +104,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 //根据stall_id获取到充電樁
     Route::get('admin/stall/{stall}/getchargingpilebystall', [ChargingPileController::class, 'getChargingPileByStall']);
 
+    Route::post('admin/chargingreport/create', [ChargingReportController::class, 'store']);
+    Route::get('admin/chargingreport', [ChargingReportController::class, 'index']);
+    Route::get('admin/chargingreport/{chargingreport}/show', [ChargingReportController::class, 'show']);
+
+    Route::post('admin/chargingreport/{chargingreport}/makeChargingReport', [ChargingReportController::class, 'makeChargingReport']);
+
+    Route::post("admin/chargingreport/{chargingreport}/test", [ChargingReportController::class, 'test']);
 });
 
 //-----------------------后台路由END-----------------------

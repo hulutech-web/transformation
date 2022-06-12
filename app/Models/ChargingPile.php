@@ -12,7 +12,7 @@ class ChargingPile extends Model
     protected $fillable = ['device_id', 'brand', 'model', 'stall_id'];
 
     //與車位表關聯
-    public function Stall()
+    public function stall()
     {
         return $this->belongsTo(Stall::class);
     }
@@ -22,4 +22,10 @@ class ChargingPile extends Model
 //    {
 //        return $this->belongsTo(Park::class);
 //    }
+
+    //與充電樁關聯
+    public function ChargingResult()
+    {
+        return $this->hasMany(ChargingResult::class);
+    }
 }

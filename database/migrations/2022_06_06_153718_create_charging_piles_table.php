@@ -23,7 +23,8 @@ class CreateChargingPilesTable extends Migration
 //            设备类型:DH-DC0050XG57
             $table->string('model')->comment('型号');
 //            車位外鍵
-            $table->unsignedBigInteger('stall_id')->comment('车位外键');
+            $table->foreignId('stall_id')->nullable()->constrained()->onDelete('set null')->comment('车位ID');
+            
             $table->timestamps();
         });
     }

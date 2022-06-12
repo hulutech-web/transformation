@@ -14,3 +14,4 @@ Route::get('{admin}/{path?}', function () {
 })->where('admin', 'admin|auth')->where('path', '.*');
 
 Route::get("carreport/{carreport}/exportpdf", [exportPdfController::class, 'exportpdf'])->name('carreport.exportpdf');
+Route::get("chargingreport/{chargingreport}/exportpdf", [exportPdfController::class, 'exportChargingPdf']);

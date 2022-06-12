@@ -26,8 +26,10 @@ class Stall extends Model
         return $this->belongsTo(Park::class);
     }
 
-    public function ChargingPile()
+//关联充电桩一对一关系
+    public function chargingPile()
     {
         return $this->hasOne(ChargingPile::class);
     }
+
 }

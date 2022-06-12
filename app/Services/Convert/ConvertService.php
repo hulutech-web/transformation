@@ -7,7 +7,7 @@ use App\Models\User;
 use Auth;
 
 /**
- * 文档转换服务
+ * 汽車報告PDF生成服务
  * @package App\Services
  */
 class ConvertService
@@ -422,6 +422,6 @@ EOF;
 EOF;
         $pdf->writeHTML($html, true, false, true, false, '');
     }
-    
+
 
 }

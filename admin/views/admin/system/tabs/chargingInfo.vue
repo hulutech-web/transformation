@@ -9,11 +9,11 @@
       </template>
       <a-form-model ref="chargingPileForm" :model="chargingPileForm" required :rules="parkPileRules">
         <a-input v-model="chargingPileForm.park_id" hidden></a-input>
-        <a-form-model-item label="停車場車位" prop="park_name">
+        <a-form-model-item label="停車場車位（搜索）" prop="park_name">
           <Search :value="chargingPileForm.park_name" width="100%" :searchForm="chargingPileForm"
                   @changeValue="changeValue"/>
         </a-form-model-item>
-        <a-form-model-item label="車位號" prop="stall_id">
+        <a-form-model-item label="車位號（選擇）" prop="stall_id">
           <a-input v-model="chargingPileForm.stall_id" hidden></a-input>
           <a-select :value="stallValue" @change="handleChange">
             <a-select-option v-for="(stall,index) in stallOptions" :key="index">{{ stall.number }}</a-select-option>
@@ -35,7 +35,8 @@
 
     </a-card>
     <a-card title="充電樁列表">
-      <a-table :pagination="false" :data-source="chargingPiles.data" :columns="chargingPileColumns"
+      <a-table :pagination="false" size="small" bordered :data-source="chargingPiles.data"
+               :columns="chargingPileColumns"
                rowKey="id">
         <template slot="action" slot-scope="text,record">
           <a-button type="danger" size="small" @click="delChargingPile(record)">刪除</a-button>
@@ -68,7 +69,7 @@ const chargingPileColumns = [
   {id: 'id', dataIndex: 'id', title: 'id'},
   {id: 'device_id', dataIndex: 'device_id', title: '設備ID'},
   {id: 'brand', dataIndex: 'brand', title: '品牌'},
-  {id: 'phone', dataIndex: 'phone', title: '型號'},
+  {id: 'model', dataIndex: 'model', title: '型號'},
   {id: 'action', dataIndex: 'action', title: '操作', scopedSlots: {customRender: 'action'},},
 ]
 export default {

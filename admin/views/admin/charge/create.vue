@@ -27,7 +27,7 @@
         <a-form-model-item label="停車場" prop="park_name">
 
           <Search :value="chargingReportForm.park_name" width="100%" :searchForm="chargingReportForm"
-                  @changeValue="changeValue"/>
+                  @changeValue="changeValue" :disable="disabledSelectPark"/>
 
         </a-form-model-item>
         <a-row :gutter="[16,16]">
@@ -59,13 +59,14 @@
                 <a-collapse-panel key="1" header="報告詳情">
                   <a-form-model-item label="報告內容" prop="result">
                     <div v-for="(item, ind) in chargingFields" :key="ind" class="list">
-                      <span style="padding-left:10px;">{{ item.field_id }}:{{ item.field_name }}</span>
-
-                      <div v-for="(sub,index) in item.field_options" :key="index">
+                      <!--                      一級描述-->
+                      <span style="font-weight: bold">{{ item.field_id }}:{{ item.field_name }}</span>
+                      <!--選項-->
+                      <div v-for="(sub,idx) in item.field_options" :key="idx">
                         <span>{{ sub.field_id }}:{{ sub.field_name }}</span>
                         <a-radio-group class="list_group"
-                                       v-if="chargingReportForm.result.length > 0"
-                                       v-model="chargingReportForm.result[ind].field_options[index].value">
+                                       v-model="chargingReportForm.results[index].resultData[ind].field_options[idx].value"
+                                       :default-value="sub.value">
                           <a-radio value="P">P</a-radio>
                           <a-radio value="F">F</a-radio>
                           <a-radio value="N">N</a-radio>
@@ -95,8 +96,10 @@
 <script>
 import Search from "#/components/RemoteSearch";
 import ImportFile from "#/components/ImportFile";
+import lodash from 'lodash'
 // lodash.cloneDeep(objects)
 import moment from 'moment'
+import results from './resultData'
 
 const chargingReportColumns = [
   {id: 'id', dataIndex: 'id', title: 'id'},
@@ -122,17 +125,16 @@ export default {
       chargingReportRules,
       chargingFields: [],
       stallValue: '',
+      disabledSelectPark: false,
       locationId: 0,//從0開始
       chargingReportForm: {
-        report_date: moment(new Date().toLocaleDateString(), 'YYYY-MM-DD'),
-        park_id: '',
+        report_date: moment().format('YYYY-MM-DD'),//必要
+        stall_ids: [],//必要取stall_ids
+        park_id: '',//必要
+        remark: '',//必要
+        user_id: JSON.parse(localStorage.getItem('user'))['id'],//必要
         park_name: '',
-        stalls: [],
-        charging_pile_id: '',
-        charging_results: [],
-        user_id: JSON.parse(localStorage.getItem('user'))['id'],
-        remark: '',
-        result: []
+        results: [{resultData: results, device_id: null}],
       },
       stalls: [
         {
@@ -178,10 +180,16 @@ export default {
       let stall_id = this.stallOptions[data - 1].id
       let res = await this.getChargingPileByStallId(stall_id)
       Object.assign(this.ChargingPiles[this.locationId], {
-        id: res.id,
+        id: res.id,//充電樁ID
         device_id: res.device_id,
         brand: res.brand,
         model: res.model,
+      })
+      //把充電樁ID放入results
+      this.chargingReportForm.results[this.locationId].device_id = res.id
+      //✨提交的數據
+      this.chargingReportForm.stall_ids.push({
+        id: stall_id
       })
     },
     async getStallByParkId(park_id) {
@@ -190,6 +198,7 @@ export default {
     changeValue(data) {
       // 停車場選擇事件，只是為了顯示搜索框的值
       const {value, form} = data
+      this.disabledSelectPark = true
       this.chargingReportForm.park_id = value.id
       this.chargingReportForm.park_name = value.name
     },
@@ -204,14 +213,17 @@ export default {
         brand: '',
         model: '',
       })
+      let data = lodash.cloneDeep(this.chargingReportForm.results[0])
+      this.chargingReportForm.results.push(data)
     },
     delChargingReportStall() {
       this.stalls.pop()
-      // this.chargingReportForm.stalls.pop()
+      this.chargingReportForm.stall_ids.pop()
     },
-    onSubmit() {
-      console.log()
-      // console.log(this.chargingReportForm)
+    async onSubmit() {
+      await this.axios.post('admin/chargingreport/create', this.chargingReportForm).then(_ => {
+        this.$router.push({path: '/admin/charge/index'})
+      })
     },
     //輔助函數，幫助定位當前選擇的是第幾個
     locationPoint(index) {

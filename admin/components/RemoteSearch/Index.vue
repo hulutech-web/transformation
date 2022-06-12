@@ -1,7 +1,7 @@
 <template>
   <a-select show-search :value="value" placeholder="請輸入關鍵字" :style="`width:${width}`"
             :default-active-first-option="false" :show-arrow="false" :filter-option="false" :not-found-content="null"
-            @search="handleSearch" @change="handleChange">
+            @search="handleSearch" @change="handleChange" :disabled="disable">
     <a-select-option v-for="(d, index) in formData" :key="index">
       {{ d.name }}
     </a-select-option>
@@ -31,6 +31,12 @@ export default {
       type: String,
       default: 'admin/park/search'
     },
+    disable: {
+      type: Boolean,
+      default() {
+        return false;
+      }
+    }
   },
   data() {
     this.handleSearch = debounce(this.handleSearch, 500);

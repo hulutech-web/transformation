@@ -2,7 +2,7 @@
 
 namespace App\Imports;
 
-use App\Models\ChargingPile;
+use App\Models\Stall;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\SkipsFailures;
 use Maatwebsite\Excel\Concerns\SkipsOnFailure;
@@ -23,12 +23,15 @@ class ChargingPileImport implements ToModel, WithValidation, SkipsOnFailure
         if ($row[0] == '設備編號') {
             return null;
         }
-        return new ChargingPile([
+//        注意：需要关联导入，否则关联查询不出来。找出stall模型，并关联上chargingPile模型
+        $stall = Stall::where('id', (int)$row[3])->first();
+        $chargingPile = $stall->chargingPile()->create([
             'device_id' => $row[0],
             'brand' => $row[1],
-            'model' => ($row[2]),
-            'stall_id' => (int)$row[3],
+            'model' => $row[2],
         ]);
+
+        return $chargingPile;
     }
 
     public function rules(): array

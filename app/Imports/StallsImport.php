@@ -2,7 +2,7 @@
 
 namespace App\Imports;
 
-use App\Models\Stall;
+use App\Models\Park;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\SkipsFailures;
 use Maatwebsite\Excel\Concerns\SkipsOnFailure;
@@ -27,12 +27,13 @@ class StallsImport implements ToModel, WithValidation, SkipsOnFailure
         if ($row[0] == '編號') {
             return null;
         }
-
-        return new Stall([
+        $park = Park::where('id', (int)$row[2])->first();
+        $stall = $park->stalls()->create([
             'number' => $row[0],
             'location' => $row[1],
-            'park_id' => (int)($row[2]),
+            'park_id' => $park->id,
         ]);
+        return $stall;
     }
 
     public function rules(): array

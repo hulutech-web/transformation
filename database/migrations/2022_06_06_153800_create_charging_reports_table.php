@@ -19,7 +19,7 @@ class CreateChargingReportsTable extends Migration
             $table->json('stall_ids')->comment('车位ID');
             $table->text('remark')->nullable()->comment('备注');
             $table->unsignedBigInteger('user_id')->nullable()->comment('报表人ID');
-            $table->foreignId('park_id')->nullable()->constrained('parks')->onDelete('set null')->comment('停车场ID');
+            $table->foreignId('park_id')->nullable()->constrained()->onDelete('set null')->comment('停车场ID');
             $table->timestamps();
         });
     }
