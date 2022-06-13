@@ -348,7 +348,7 @@ EOF;
 </tr>
 <tr>
 <td colspan="7" style="text-align: right">維修人員:$user_name</td>
-<td colspan="1"><img src="images/logo.png" width="25" height="25" alt=""></td>
+<td colspan="1"><img src="images/logo1.png" width="25" height="25" alt=""></td>
 </tr>
 
 </tbody>

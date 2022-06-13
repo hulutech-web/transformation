@@ -1,95 +1,26 @@
 <template>
   <div style="padding: 20px; background: white; min-height: 100%">
-    <div style="background-color: #ececec; padding: 20px;">
-      <a-row :gutter="[16,16]">
-        <a-col :span="4">
-          <a-card class="card_center">
-            <section class="dashboard_content">1</section>
-            <p class="dashboard_title">楼盘总数</p>
-          </a-card>
-        </a-col>
-
-        <a-col :span="4">
-          <a-card class="card_center">
-            <section class="dashboard_content">2</section>
-            <p class="dashboard_title">楼盘业主数</p>
-          </a-card>
-        </a-col>
-        <a-col :span="4">
-          <a-card class="card_center">
-            <section class="dashboard_content">3</section>
-            <p class="dashboard_title">合同总数</p>
-          </a-card>
-        </a-col>
-        <a-col :span="4">
-          <a-card class="card_center">
-            <section class="dashboard_content">￥333333</section>
-            <p class="dashboard_title">合同总金额:333333</p>
-          </a-card>
-        </a-col>
-        <a-col :span="4">
-          <a-card class="card_center">
-            <section class="dashboard_content">￥3333</section>
-            <p class="dashboard_title">首付费用:333</p>
-          </a-card>
-        </a-col>
-        <a-col :span="4">
-          <a-card class="card_center">
-            <section class="dashboard_content">333</section>
-            <p class="dashboard_title">q24351234</p>
-          </a-card>
-        </a-col>
-      </a-row>
-    </div>
     <div>
-
-      <a-card>
-        <a-row :gutter="[16,16]">
-          <a-col :span="8">
-            <a-card>
-              <p class="dashboard_content">财务</p>
-              <PieChart :pieData="pieData"/>
-            </a-card>
-          </a-col>
-          <a-col :span="8">
-            <a-card>
-
-              <p class="dashboard_content">变更土地</p>
-              <PieChart :pieData="replaceData"/>
-            </a-card>
-          </a-col>
-          <a-col :span="8">
-            <a-card>
-
-              <p class="dashboard_content">原始土地</p>
-              <PieChart :pieData="cateData"/>
-            </a-card>
-          </a-col>
-        </a-row>
-        <a-row :gutter="[16,16]">
-
-
-        </a-row>
-      </a-card>
+      <h1>PDF報表系統</h1>
+      <p>
+        汽車維修報告管理
+      </p>
+      <p>
+        充電轉報告管理
+      </p>
+      <p>
+        多員工管理
+      </p>
+      <p>
+        多角色配置
+      </p>
+      <p>
+        汽車維修報告EXCEL模板導入
+      </p>
+      <p>
+        充電轉報告EXCEL模板導入
+      </p>
     </div>
-    <div>
-      <a-card>
-        <a-descriptions title="其他信息">
-
-          <a-descriptions-item label="系统用户">
-            123名
-          </a-descriptions-item>
-          <a-descriptions-item label="已办理">
-            123户
-          </a-descriptions-item>
-          <a-descriptions-item label="待办理">
-            1321户
-          </a-descriptions-item>
-        </a-descriptions>
-      </a-card>
-
-    </div>
-
   </div>
 </template>
 

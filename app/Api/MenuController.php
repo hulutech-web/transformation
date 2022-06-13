@@ -44,6 +44,7 @@ class MenuController extends Controller
     {
         $user = Auth::user();
         $permissions = $user->getPermissionsViaRoles();
+//        return $permissions;
         $menus = MenuService::filterMenus($permissions);
         return $menus;
     }

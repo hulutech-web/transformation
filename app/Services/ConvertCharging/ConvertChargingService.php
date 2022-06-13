@@ -690,7 +690,7 @@ EOF;
 <tbody>
 <tr>
 <th colspan="6" rowspan="3" style="font-size: .7em;">備註:$remark</th>
-<th colspan="4" style="font-size: .7em;">簽署：<img src="images/logo.png" alt="" style="width:28px;"></th>
+<th colspan="4" style="font-size: .7em;">簽署：<img src="images/logo1.png" alt="" style="width:28px;"></th>
 
 </tr>
 <tr>

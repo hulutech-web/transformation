@@ -8,9 +8,7 @@
         <template slot="action" slot-scope="text,record">
           <a-button-group>
             <a-button type="primary" @click="showReport(record)">查看</a-button>
-            <a-button type="danger" ghost>刪除</a-button>
             <a-button type="danger" icon="download" @click="makeReport(record)" ghost>生成PDF</a-button>
-            <a-button type="primary" @click="test(record)">测试collect</a-button>
           </a-button-group>
         </template>
         <template slot="park" slot-scope="text,record">
