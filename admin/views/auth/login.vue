@@ -50,7 +50,7 @@ export default {
           localStorage.setItem('token', token)
           this.axios.post("admin/user/info").then(res => {
             localStorage.setItem('user', JSON.stringify(res))
-            this.$router.push({path: '/admin/index'})
+            this.$router.push({path: '/admin/switch'})
           })
         }
       })

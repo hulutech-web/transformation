@@ -163,7 +163,9 @@ export default {
           if (this.form.content_brief.some(item => item.value == '')) {
             return this.$message.error({content: '內容簡報不完整'})
           }
-          await this.axios.post('admin/carreport', this.form)
+          await this.axios.post('admin/carreport', this.form).then(_=>{
+            this.$router.push('/admin/car/index')
+          })
         } else {
           console.log('error submit!!');
           return false;

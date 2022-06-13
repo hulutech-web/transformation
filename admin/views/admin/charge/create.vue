@@ -2,9 +2,7 @@
   <div>
     <a-card title="添加充電樁報告">
       <template #extra>
-        <a href="/files/stalltemplate.xlsx">模板下載</a>
         <a-button-group>
-          <ImportFile :action="ChargingReportUrl"/>
           <a-button type="primary" @click="addChargingReportStall" :disabled="stalls.length>=8">
             <a-icon type="plus"/>
             添加
