@@ -61,7 +61,7 @@ class ConvertChargingService
         $pdf->setFooterData([0, 64, 0], [0, 64, 128]);
 
         // 设置页眉和页脚字体
-        $pdf->setHeaderFont(['droidsansfallback', '', '10']);
+        $pdf->setHeaderFont(['droidsansfallback', '', '8']);
         $pdf->setFooterFont(['droidsansfallback', '', '8']);
 
         // 设置默认等宽字体
@@ -70,14 +70,14 @@ class ConvertChargingService
         // 设置间距
         $pdf->SetMargins(15, 15, 15);//页面间隔
         $pdf->SetHeaderMargin(5);//页眉top间隔
-        $pdf->SetFooterMargin(10);//页脚bottom间隔
+        $pdf->SetFooterMargin(5);//页脚bottom间隔
 
         // 设置分页
-        $pdf->SetAutoPageBreak(true, 25);
+        $pdf->SetAutoPageBreak(true, 0);
 
         // set default font subsetting mode
         $pdf->setFontSubsetting(true);
-
+        $pdf->Ln(3);
 
         //设置字体 stsongstdlight支持中文(有些浏览器测试不正常，EDGE乱码，firefox正常)
         $pdf->SetFont('stsongstdlight', '', 12);
@@ -99,15 +99,15 @@ class ConvertChargingService
     table {
         font-size: 12pt;
         border: 1px solid black;
-        padding: 3px;
+        padding: 2px;
     }
     th {
         border: 1px solid black;
-        padding: 3px;
+        padding: 2px;
     }
     td {
         border: 1px solid black;
-        padding: 3px;
+        padding: 2px;
     }
 </style>
 
@@ -349,7 +349,7 @@ EOF;
 
 
                                         $html .= <<<EOF
-<th colspan="1"  style="font-size: .7em;">$overValue</th>
+<th colspan="1"  style="font-size: .7em;text-align: center">$overValue</th>
 EOF;
 
 
@@ -604,7 +604,7 @@ EOF;
 
 
                                         $html .= <<<EOF
-<th colspan="1"  style="font-size: .7em;">$overValue</th>
+<th colspan="1"  style="font-size: .7em;text-align: center;">$overValue</th>
 EOF;
                                         //始终保持有5个单元格，如果有多余的单元格，则填充空白
 
@@ -681,6 +681,8 @@ EOF;
         }
 
         //獲取LOGO圖片
+//        $html .= '<div style="page-break-after: always;"></div>';
+//        $pdf->Ln(10);//换行符
 
 //添加備註信息
         $html .= <<<EOF
@@ -688,7 +690,7 @@ EOF;
 <tbody>
 <tr>
 <th colspan="6" rowspan="3" style="font-size: .7em;">備註:$remark</th>
-<th colspan="4" style="font-size: .7em;">簽署：<img src="images/logo.png" alt="" style="width:40px;"></th>
+<th colspan="4" style="font-size: .7em;">簽署：<img src="images/logo.png" alt="" style="width:28px;"></th>
 
 </tr>
 <tr>
