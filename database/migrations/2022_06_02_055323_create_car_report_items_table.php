@@ -18,7 +18,7 @@ class CreateCarReportItemsTable extends Migration
             $table->string('title')->comment('项目名称');
             $table->string('name')->comment('项目英文字段');
             //结果状态
-            $table->json('options')->nullable()->comment('结果状态选项');
+            $table->text('options')->nullable()->comment('结果状态选项');
             $table->timestamps();
         });
     }

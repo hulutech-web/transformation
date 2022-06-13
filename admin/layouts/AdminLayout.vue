@@ -3,10 +3,10 @@
   <a-layout id="components-layout-demo-side" style="min-height: 100vh">
 
     <a-layout-sider v-model="collapsed" collapsible :theme="theme" :trigger="null">
-      <div style="max-width:200px;text-align: center;padding:20px 0;">
+      <div style="max-width:200px;text-align: center;padding:20px 0;cursor: pointer;" @click="toHome">
         <span style="font-size: 18px;text-align: center;color: #f8a326;">PDF報表系统</span>
       </div>
-      <Menu :menus="menus"></Menu>
+      <Menu v-show="isHidden" :menus="menus"></Menu>
     </a-layout-sider>
     <a-layout>
       <!--      id="build"的作用是当页面跳转时scrollTo该位置-->
@@ -90,6 +90,7 @@ export default {
       role: null,
       //当前路由的名字
       Breadcrumbs: [],
+      isHidden: false,
       user: JSON.parse(localStorage.getItem('user')),
       theme: this.$store.state.theme,
       id: '',
@@ -116,6 +117,11 @@ export default {
     $route: {
       handler(n) {
         this.generateBreadcrumb()
+        if (n.path === '/admin/switch') {
+          this.isHidden = false
+        } else {
+          this.isHidden = true
+        }
       },
       immediate: true
     },
@@ -173,6 +179,12 @@ export default {
       //缓存所有角色
       localStorage.setItem('roles', JSON.stringify(roles))
       this.$store.commit('roles', roles)
+    },
+    toHome() {
+      //获取当前路由
+      let route = this.$route
+      if (route.path == '/admin/switch') return
+      this.$router.push({path: '/admin/switch'})
     }
   }
 };

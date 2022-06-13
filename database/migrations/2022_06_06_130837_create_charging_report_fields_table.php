@@ -17,7 +17,7 @@ class CreateChargingReportFieldsTable extends Migration
             $table->id();
             $table->string('field_id')->comment('字段ID');
             $table->string('field_name')->comment('字段名称');
-            $table->json('field_options')->comment('字段结果[P/F/N]');
+            $table->text('field_options')->comment('字段结果[P/F/N]');
             $table->timestamps();
         });
     }

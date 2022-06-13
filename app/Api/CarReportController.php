@@ -49,9 +49,9 @@ class CarReportController extends Controller
      * @param \App\Models\CarReport $carReport
      * @return \Illuminate\Http\Response
      */
-    public function show(CarReport $carReport)
+    public function show(CarReport $carreport)
     {
-        //
+        return $carreport;
     }
 
     /**

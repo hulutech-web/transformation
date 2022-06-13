@@ -4,7 +4,7 @@
       <template #extra>
         <a-input-search placeholder="请输入公司关键字" enter-button></a-input-search>
       </template>
-      <a-table bordered size="small" :pagination="false" :dataSource="carReports.data" rowKey="id" :columns="columns">
+      <a-table bordered :pagination="false" :dataSource="carReports.data" rowKey="id" :columns="columns">
 
         <template slot="repair" slot-scope="text,record">
           <span v-for="(item, index) in record.repair_project" :key="index">{{ item.value }}</span>
@@ -14,7 +14,8 @@
         </template>
         <template slot="action" slot-scope="text,record">
           <a-button-group>
-            <a-button type="primary" size="small" @click="exportPdf(record)">查看</a-button>
+            <a-button type="primary" size="small" @click="exportPdf(record)" icon="download">生成PDF</a-button>
+            <a-button type="primary" size="small" @click="show(record)">查看</a-button>
             <a-button type="danger" size="small" @click="deleteRecord(record)">删除</a-button>
           </a-button-group>
         </template>
@@ -91,6 +92,9 @@ export default {
     },
     exportPdf(record) {
       window.open(`/carreport/${record.id}/exportpdf`)
+    },
+    show(record) {
+      this.$router.push({path: `/admin/car/${record.id}/show`})
     },
     deleteRecord(record) {
       this.$confirm({

@@ -32,7 +32,7 @@ class ConvertChargingService
         $this->setHeaderSection($pdf, $park_name, $report_date);
 
 //第二階段：设置充電樁信息
-        $this->setContentSection($pdf, $chargingResults, $chargingPiles);
+        $this->setContentSection($pdf, $chargingResults, $chargingPiles, $remark, $user_name, $report_date);
         $time = $chargingResource->created_at;
 
         $filename = $time.'.pdf';
@@ -154,7 +154,7 @@ EOF;
      * 設置內容區域
      */
 //添加8份有问题，数据有问题(初步判断为前端问题)
-    public function setContentSection($pdf, $chargingResults, $chargingPiles)
+    public function setContentSection($pdf, $chargingResults, $chargingPiles, $remark, $user_name, $report_date)
     {
         //构造范围数组，每组5个[【0-4】,【5-9】,【10-14】。。。]
         $range = $this->makeArray(count($chargingResults), 5);
@@ -188,7 +188,7 @@ EOF;
 <table>
 <tbody>
 <tr>
-<th  style="text-align: left;font-size: 0.6em;background-color:#60A5FA;color:white;">模型ID
+<th  style="text-align: left;font-size: 0.6em;background-color:#60A5FA;color:white;">編號ID
 </th>
 <th style="text-align: left;font-size: 0.6em;background-color:#60A5FA;color:white;">充電站ID
 </th>
@@ -342,18 +342,68 @@ EOF;
 
                                     $Arange = $this->makeArray(count($showData_value_array), 5);
 //                                    [0-4][5,10]
-
+                                    $groupLength = 0;
                                     for ($x = $Arange[$curGroup - 1][0]; $x <= $Arange[$curGroup - 1][count($Arange[$curGroup - 1]) - 1]; $x++) {
-                                        $arrLength = count($Arange[$curGroup - 1]);
+                                        $groupLength = count($Arange[$curGroup - 1]);
                                         $overValue = $showData_value_array[$x];
 
 
                                         $html .= <<<EOF
 <th colspan="1"  style="font-size: .7em;">$overValue</th>
 EOF;
+
+
                                         //始终保持有5个单元格，如果有多余的单元格，则填充空白
 
 
+                                    }
+                                    switch ($groupLength) {
+                                        case 1:
+                                            $html .= <<<EOF
+<td colspan="1">
+    <span style="font-size: .7em;text-align: center;"></span>
+</td>
+<td colspan="1">
+    <span style="font-size: .7em;text-align: center;"></span>
+</td>
+<td colspan="1">
+    <span style="font-size: .7em;text-align: center;"></span>
+</td>
+<td colspan="1">
+    <span style="font-size: .7em;text-align: center;"></span>
+</td>
+EOF;
+                                            break;
+                                        case 2:
+                                            $html .= <<<EOF
+<td colspan="1">
+    <span style="font-size: .7em;text-align: center;"></span>
+</td>
+<td colspan="1">
+    <span style="font-size: .7em;text-align: center;"></span>
+</td>
+<td colspan="1">
+    <span style="font-size: .7em;text-align: center;"></span>
+</td>
+EOF;
+                                            break;
+                                        case 3:
+                                            $html .= <<<EOF
+<td colspan="1">
+    <span style="font-size: .7em;text-align: center;"></span>
+</td>
+<td colspan="1">
+    <span style="font-size: .7em;text-align: center;"></span>
+</td>
+EOF;
+                                            break;
+                                        case 4:
+                                            $html .= <<<EOF
+<td colspan="1">
+    <span style="font-size: .7em;text-align: center;"></span>
+</td>
+EOF;
+                                            break;
                                     }
 //=======================================================
 
@@ -392,7 +442,7 @@ EOF;
 <table>
 <tbody>
 <tr>
-<th  style="text-align: left;font-size: 0.6em;background-color:#60A5FA;color:white;">模型ID
+<th  style="text-align: left;font-size: 0.6em;background-color:#60A5FA;color:white;">編號ID
 </th>
 <th style="text-align: left;font-size: 0.6em;background-color:#60A5FA;color:white;">充電站ID
 </th>
@@ -467,6 +517,7 @@ EOF;
 //                        要去匹配充电桩的ID号，如果相同，则渲染，如果不同，则跳过
 
                             for ($t = $range[$curGroup][0]; $t <= $range[$curGroup][count($range[$curGroup]) - 1]; $t++) {
+
                                 $charging_pile_id = collect(collect($chargingResults[$t])->get('result'))->get('device_id');
                                 $html .= <<<EOF
     <td colspan="1">
@@ -546,9 +597,9 @@ EOF;
 
                                     $Arange = $this->makeArray(count($showData_value_array), 5);
 //                                    [0-4][5,10]
-
+                                    $groupLength = 0;
                                     for ($x = $Arange[$curGroup - 1][0]; $x <= $Arange[$curGroup - 1][count($Arange[$curGroup - 1]) - 1]; $x++) {
-                                        $arrLength = count($Arange[$curGroup - 1]);
+                                        $groupLength = count($Arange[$curGroup - 1]);
                                         $overValue = $showData_value_array[$x];
 
 
@@ -560,6 +611,54 @@ EOF;
 
                                     }
 //=======================================================
+                                    switch ($groupLength) {
+                                        case 1:
+                                            $html .= <<<EOF
+<td colspan="1">
+    <span style="font-size: .7em;text-align: center;"></span>
+</td>
+<td colspan="1">
+    <span style="font-size: .7em;text-align: center;"></span>
+</td>
+<td colspan="1">
+    <span style="font-size: .7em;text-align: center;"></span>
+</td>
+<td colspan="1">
+    <span style="font-size: .7em;text-align: center;"></span>
+</td>
+EOF;
+                                            break;
+                                        case 2:
+                                            $html .= <<<EOF
+<td colspan="1">
+    <span style="font-size: .7em;text-align: center;"></span>
+</td>
+<td colspan="1">
+    <span style="font-size: .7em;text-align: center;"></span>
+</td>
+<td colspan="1">
+    <span style="font-size: .7em;text-align: center;"></span>
+</td>
+EOF;
+                                            break;
+                                        case 3:
+                                            $html .= <<<EOF
+<td colspan="1">
+    <span style="font-size: .7em;text-align: center;"></span>
+</td>
+<td colspan="1">
+    <span style="font-size: .7em;text-align: center;"></span>
+</td>
+EOF;
+                                            break;
+                                        case 4:
+                                            $html .= <<<EOF
+<td colspan="1">
+    <span style="font-size: .7em;text-align: center;"></span>
+</td>
+EOF;
+                                            break;
+                                    }
 
                                     $html .= <<<EOF
 </tr>
@@ -569,7 +668,6 @@ EOF;
 
 
                                 });
-
                             }
                             );
 
@@ -582,6 +680,23 @@ EOF;
 
         }
 
+        //獲取LOGO圖片
+
+//添加備註信息
+        $html .= <<<EOF
+<table>
+<tbody>
+<tr>
+<th colspan="6" rowspan="3" style="font-size: .7em;">備註:$remark</th>
+<th colspan="4" style="font-size: .7em;">簽署：<img src="images/logo.png" alt="" style="width:40px;"></th>
+
+</tr>
+<tr>
+<th colspan="4" style="font-size: .7em;">日期：$report_date $user_name</th>
+</tr>
+</tbody>
+</table>
+EOF;
 
         //这一行始终放在最后
 
@@ -589,6 +704,18 @@ EOF;
     }
 
 //如果有$html参数时。执行连接。如果没有执行新建
+
+    protected function makeArray($length, $chunk)
+    {
+        $array = array();
+        for ($i = 0; $i < $length; $i++) {
+            array_push($array, $i);
+        }
+        $array = array_chunk($array, $chunk);
+        return $array;
+    }
+
+//帮助函数，将数组分段成二维数组
 
     public function showStyle($html)
     {
@@ -633,17 +760,6 @@ EOF;
         }
     }
 
-//帮助函数，将数组分段成二维数组
-    protected function makeArray($length, $chunk)
-    {
-        $array = array();
-        for ($i = 0; $i < $length; $i++) {
-            array_push($array, $i);
-        }
-        $array = array_chunk($array, $chunk);
-        return $array;
-    }
-
 
     //将数组横向分布排列
 //[
@@ -660,6 +776,7 @@ EOF;
 //]
 
 //格式化显示数据，使其结果横向分布排列
+
     protected function formatDisplayData($data, $chuckNumber)
     {
 

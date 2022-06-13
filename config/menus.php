@@ -6,7 +6,7 @@ return [
         'path' => '/admin/index',
         'icon' => 'bar-chart',
         'meta' => array(
-            'title' => '首页',
+            'title' => '首頁',
             'permission' => 'admin.index',
             'description' => '展示后台首页',
         ),
@@ -18,7 +18,7 @@ return [
         'path' => '/admin/user',
         'icon' => 'user',
         'meta' => array(
-            'title' => '用户管理',
+            'title' => '用戶管理',
             'permission' => 'admin.user',
             'description' => '展示所有用户管理页面',
         ),
@@ -41,9 +41,9 @@ return [
         'id' => 4,
         'parent_id' => 0,
         'path' => '/admin/car',
-        'icon' => 'setting',
+        'icon' => 'car',
         'meta' => array(
-            'title' => '汽车管理',
+            'title' => '汽车報告',
             'permission' => 'admin.car',
             'description' => '汽车报告管理',
         ),
@@ -52,7 +52,7 @@ return [
             [
                 'id' => 5,
                 'parent_id' => 4,
-                'icon' => 'contacts',
+                'icon' => 'bars',
                 'path' => '/admin/car/index',
                 'meta' => array(
                     'title' => '汽车报告列表',
@@ -63,12 +63,12 @@ return [
             ], [
                 'id' => 6,
                 'parent_id' => 4,
-                'icon' => 'contacts',
+                'icon' => 'medicine-box',
                 'path' => '/admin/car/create',
                 'meta' => array(
-                    'title' => '汽车报告添加',
+                    'title' => '汽车報告添加',
                     'permission' => 'admin.car.create',
-                    'description' => '汽车报告添加',
+                    'description' => '汽车報告添加',
                 ),
                 'name' => 'admin.car.create',
             ])
@@ -77,18 +77,18 @@ return [
         'id' => 7,
         'parent_id' => 0,
         'path' => '/admin/charge',
-        'icon' => 'setting',
+        'icon' => 'thunderbolt',
         'meta' => array(
-            'title' => '充电桩管理',
+            'title' => '充電樁報告',
             'permission' => 'admin.charge',
-            'description' => '充电桩报告管理',
+            'description' => '充電樁報告管理',
         ),
         'name' => 'admin.charge',
         'children' => array(
             [
                 'id' => 8,
                 'parent_id' => 7,
-                'icon' => 'contacts',
+                'icon' => 'hdd',
                 'path' => '/admin/charge/index',
                 'meta' => array(
                     'title' => '充电桩报告列表',
@@ -100,7 +100,7 @@ return [
             [
                 'id' => 9,
                 'parent_id' => 7,
-                'icon' => 'contacts',
+                'icon' => 'cluster',
                 'path' => '/admin/charge/create',
                 'meta' => array(
                     'title' => '充電樁报告添加',
@@ -153,7 +153,7 @@ return [
                 'icon' => 'car',
                 'path' => '/admin/system/car',
                 'meta' => array(
-                    'title' => '汽车檢修功能配置',
+                    'title' => '汽车報告配置',
                     'permission' => 'admin.system.car',
                     'description' => '配置汽车报告项目字段',
                 ),
@@ -164,7 +164,7 @@ return [
                 'icon' => 'api',
                 'path' => '/admin/system/charge',
                 'meta' => array(
-                    'title' => '充电桩檢修功能配置',
+                    'title' => '充电樁報告配置',
                     'permission' => 'admin.system.charge',
                     'description' => '配置充电桩报告项目字段',
                 ),

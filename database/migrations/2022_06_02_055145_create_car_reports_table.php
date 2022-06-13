@@ -23,15 +23,15 @@ class CreateCarReportsTable extends Migration
             //行车公里数
             $table->string('mileage')->comment('行车公里数');
             //维修项目
-            $table->json('repair_project')->comment('维修项目');
+            $table->text('repair_project')->comment('维修项目');
             //            费用合计
             $table->string('total_cost')->comment('费用合计');
             //            内容简报
-            $table->json('content_brief')->comment('内容简报');
+            $table->text('content_brief')->comment('内容简报');
             //备注
             $table->string('remark')->nullable()->comment('备注');
             //附件
-            $table->json('attachment')->nullable()->comment('附件');
+            $table->text('attachment')->nullable()->comment('附件');
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('SET NULL')->comment('报告人');
             $table->timestamps();
         });

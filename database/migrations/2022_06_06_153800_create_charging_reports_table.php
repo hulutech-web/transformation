@@ -16,7 +16,7 @@ class CreateChargingReportsTable extends Migration
         Schema::create('charging_reports', function (Blueprint $table) {
             $table->id();
             $table->date('report_date')->comment('报表日期');
-            $table->json('stall_ids')->comment('车位ID');
+            $table->text('stall_ids')->comment('车位ID');
             $table->text('remark')->nullable()->comment('备注');
             $table->unsignedBigInteger('user_id')->nullable()->comment('报表人ID');
             $table->foreignId('park_id')->nullable()->constrained()->onDelete('set null')->comment('停车场ID');

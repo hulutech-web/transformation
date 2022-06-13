@@ -17,7 +17,7 @@ class CreateChargingResultsTable extends Migration
             $table->id();
             $table->foreignId('charging_pile_id')->nullable()->constrained()->onDelete('set null')->comment('充电桩ID');
             $table->foreignId('charging_report_id')->nullable()->constrained()->onDelete('set null')->comment('充电报表ID');
-            $table->json('result')->comment('报告结果');
+            $table->text('result')->comment('报告结果');
             $table->timestamps();
         });
     }
