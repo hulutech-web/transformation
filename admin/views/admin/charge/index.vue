@@ -1,16 +1,14 @@
 <template>
   <div>
-    <a-card title="報告列表">
+    <a-card title="報告列表" size="small">
       <template #extra>
         <a-input-search enter-button></a-input-search>
       </template>
-      <a-table :data-source="chargingReports.data" :columns="columns" rowKey="id" bordered :pagination="false">
-        <template slot="action" slot-scope="text,record">
-          <a-button-group>
-            <a-button type="primary" @click="showReport(record)">查看</a-button>
-            <a-button type="danger" icon="download" @click="makeReport(record)" ghost>生成PDF</a-button>
-          </a-button-group>
-        </template>
+      <a-table style="width:auto;margin:0 auto;" size="small" :data-source="chargingReports.data" :columns="columns"
+               rowKey="id"
+               bordered
+               :pagination="false">
+
         <template slot="park" slot-scope="text,record">
           {{ record.park.name }}
         </template>
@@ -22,7 +20,12 @@
         <a-tag>{{ item.device_id }}</a-tag>
         </span>
         </template>
-
+        <template slot="action" slot-scope="text,record">
+          <a-button-group>
+            <a-button type="primary" size="small" @click="showReport(record)">查看</a-button>
+            <a-button type="danger" size="small" icon="cloud-download" @click="makeReport(record)" ghost>PDF</a-button>
+          </a-button-group>
+        </template>
       </a-table>
       <a-pagination v-if="chargingReports.total>chargingReports.per_page" :defaultCurrent='1'
                     :total="chargingReports.total"
@@ -40,13 +43,14 @@ const columns = [
     title: 'ID',
     dataIndex: 'id',
     key: 'id',
-    width: 80,
+    width: 60,
     align: 'center'
   },
   {
     title: '日期',
     dataIndex: 'report_date',
     key: 'report_date',
+    width: 80,
     align: 'center'
   },
   {
@@ -56,17 +60,9 @@ const columns = [
     scopedSlots: {customRender: 'park'},
   },
   {
-    title: '備註',
-    dataIndex: 'remark',
-    key: 'remark',
-    width: 200,
-    align: 'center'
-  },
-  {
-    title: '填報人用戶',
+    title: '填報人',
     dataIndex: 'user_id',
     key: 'user_id',
-    width: 200,
     align: 'center',
     scopedSlots: {customRender: 'user'},
 
@@ -75,7 +71,6 @@ const columns = [
     title: '操作',
     key: 'action',
     dataIndex: 'action',
-    width: 200,
     align: 'center',
     scopedSlots: {customRender: 'action'}
   },

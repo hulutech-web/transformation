@@ -33,3 +33,7 @@ hover时scale为110%
     -o-transform: scale(1.1);
     transform: scale(1.1);
 }
+
+.ant-table-small.ant-table-bordered {
+    overflow-x: auto;
+}

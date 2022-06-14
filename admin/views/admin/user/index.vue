@@ -12,8 +12,8 @@
         </div>
 
       </template>
-      <div ref="content">
-        <a-table :data-source="users.data" :columns="columns" rowKey="id" bordered :pagination="false">
+      <div>
+        <a-table size="small" :data-source="users.data" :columns="columns" rowKey="id" bordered :pagination="false">
           <template slot="action" slot-scope="text,record">
             <a-button-group>
               <a-button size="small" type="info" @click="handleEdit(record)">
