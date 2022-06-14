@@ -23,8 +23,7 @@ class RoleController extends Controller
     {
         $roles = config('roles');
         if (Role::all()->count() > 0) {
-            Role::truncate();
-            return $this->message('初始化角色成功');
+            return $this->error('角色成功已初始化，无需重复初始化');
         }
         foreach ($roles as $role) {
             Role::create(['name' => $role['name'], 'title' => $role['title'], 'description' => $role['description']]);

@@ -1,54 +1,35 @@
 <template>
   <div>
-    <a-row :gutter="[16,16]">
-      <a-col :span="12">
-        <a-card title="权限配置">
-          <a-card hoverable style="margin: 10px;display: inline-block">
-            <a-card>
-              <template slot="actions" class="ant-card-actions">
 
-                <a-button type="primary" @click="initMenus">初始化菜单</a-button>
-              </template>
-              <a-card-meta title="菜单配置" style="min-height: 150px;min-width: 200px;max-width:250px;"
-                           description="生成初始化菜单，与权限一一对应">
+    <a-card title="权限配置" size="small">
+      <a-card size="small" hoverable style="display: inline-block">
+        <template slot="actions" class="ant-card-actions">
 
-              </a-card-meta>
-            </a-card>
-          </a-card>
-          <a-card hoverable style="margin: 10px;display: inline-block">
-            <a-card>
-              <template slot="actions" class="ant-card-actions">
-                <a-button type="primary" @click="initPermission">初始化权限</a-button>
-              </template>
-              <a-card-meta title="权限配置" style="min-height: 150px;min-width: 200px;max-width:250px;"
-                           description="初始化权限，控制左侧菜单显示">
+          <a-button type="primary" @click="initMenus">初始化菜单</a-button>
+        </template>
+        <a-card-meta title="菜单配置" style="height: 150px;width: 160px;"
+                     description="生成初始化菜单，与权限一一对应">
+        </a-card-meta>
 
-              </a-card-meta>
-            </a-card>
-          </a-card>
-        </a-card>
-      </a-col>
+      </a-card>
+      <a-card size="small" hoverable style="display: inline-block">
+        <template slot="actions" class="ant-card-actions">
+          <a-button type="primary" @click="initPermission">初始化权限</a-button>
+        </template>
+        <a-card-meta title="权限配置" style="height: 150px;width: 160px;"
+                     description="初始化权限，控制左侧菜单显示">
 
-
-      <a-col :span="12">
-        <a-card title="系统配置">
-          <a-card hoverable style="margin: 10px;display: inline-block">
-            <a-card>
-              <template slot="actions" class="ant-card-actions">
-
-                <a-button type="primary" @click="changeTheme">主题设置</a-button>
-              </template>
-              <a-card-meta title="主题设置" style="min-height: 150px;min-width: 200px;max-width:250px;"
-                           description="主题设置">
-
-              </a-card-meta>
-            </a-card>
-          </a-card>
-
-        </a-card>
-      </a-col>
-
-    </a-row>
+        </a-card-meta>
+      </a-card>
+      <a-card size="small" hoverable style="display: inline-block">
+        <template slot="actions" class="ant-card-actions">
+          <a-button type="primary" @click="changeTheme">主题设置</a-button>
+        </template>
+        <a-card-meta title="主题设置" style="height: 150px;width: 160px;"
+                     description="主题设置，根据需要调整左侧菜单明暗">
+        </a-card-meta>
+      </a-card>
+    </a-card>
 
   </div>
 </template>

@@ -1,25 +1,28 @@
 <template>
   <div>
-    <a-card title="角色管理">
-      <a-button slot="extra" v-if="disabled" disabled>初始化</a-button>
-      <a-button slot="extra" v-else type="primary" @click="initRoles">初始化</a-button>
-      <a-list :grid="{ gutter: 16, column: 4 }" :data-source="roles">
-        <a-list-item slot="renderItem" slot-scope="item, index">
-          <a-list-item-meta>
-            <div slot="title">{{ item.title }}</div>
-            <div slot="description" style="min-height:100px;">{{ item.description }}</div>
+    <a-card title="角色管理" size="small">
+      <template #extra>
+        <a-button slot="extra" v-if="disabled" disabled>初始化</a-button>
+        <a-button slot="extra" v-else type="primary" @click="initRoles">初始化</a-button>
+      </template>
+      <a-card size="small" hoverable style="display: inline-block;margin:5px;box-sizing: border-box;"
+              v-for="(role,index) in roles"
+              :key="index">
 
-          </a-list-item-meta>
-          <a-button type="primary" @click="setPermission(item)">设置权限</a-button>
-          <a-modal v-model="visible" title="配置权限" ok-text="确认" cancel-text="取消" @cancel="onCancel"
-                   @ok="onSubmit">
-            <a-tree checkable :multiple="true" @check="onCheck"
-                    :expanded-keys="expandedKeys" :auto-expand-parent="autoExpandParent"
-                    :checkedKeys="checkedKeys" :tree-data="permissions" @expand="onExpand"/>
-          </a-modal>
-        </a-list-item>
-      </a-list>
+        <a-card-meta :title="role.title" style="min-width: 150px;white-space: break-spaces;"
+                     :description="role.description">
+        </a-card-meta>
+        <a-button type="primary" style="margin-top:10px;" @click="setPermission(role)">设置权限</a-button>
+
+      </a-card>
     </a-card>
+    <!--    模态框-->
+    <a-modal v-model="visible" title="配置权限" ok-text="确认" cancel-text="取消" @cancel="onCancel"
+             @ok="onSubmit">
+      <a-tree checkable :multiple="true" @check="onCheck"
+              :expanded-keys="expandedKeys" :auto-expand-parent="autoExpandParent"
+              :checkedKeys="checkedKeys" :tree-data="permissions" @expand="onExpand"/>
+    </a-modal>
   </div>
 </template>
 
@@ -61,7 +64,7 @@ export default {
       await this.axios.get('admin/role').then(res => {
         this.roles = res;
         if (this.roles.length > 0) {
-          // this.disabled = true;
+          this.disabled = true;
         }
       })
     },

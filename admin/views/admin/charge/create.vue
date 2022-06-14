@@ -3,11 +3,11 @@
     <a-card title="添加充電樁報告" size="small">
       <template #extra>
         <a-button-group>
-          <a-button type="primary" @click="addChargingReportStall" :disabled="stalls.length>=8">
+          <a-button type="primary" size="small" @click="addChargingReportStall" :disabled="stalls.length>=8">
             <a-icon type="plus"/>
             添加
           </a-button>
-          <a-button type="danger" @click="delChargingReportStall" :disabled="stalls.length<2">
+          <a-button type="danger" size="small" @click="delChargingReportStall" :disabled="stalls.length<2">
             刪除
             <a-icon type="minus"/>
           </a-button>
@@ -45,13 +45,13 @@
               </a-form-model-item>
 
               <a-form-model-item label="设备信息" prop="charging_pile_id">
+                <div style="width:100%;overflow-x:scroll;">
+                  <span style="font-size: .6rem;white-space:nowrap;" v-for="(value, name) in  ChargingPiles[index]"
+                        :key="name">
+                    {{ name }}:{{ value }}
+                  </span>
+                </div>
 
-                <a-descriptions class="desc" size="small" layout="vertical" bordered :column="4">
-                  <a-descriptions-item :label="name" v-for="(value, name) in  ChargingPiles[index]"
-                                       :key="name">
-                    <span style="font-size: .6rem;">{{ value }}@</span>
-                  </a-descriptions-item>
-                </a-descriptions>
 
               </a-form-model-item>
               <a-collapse>
@@ -244,13 +244,12 @@ export default {
   border: #8c939d 1px dotted;
   padding: 4.5px;
   /*
-小尺寸时宽度100%
+小尺寸时宽度100%设置换行
 */
   @media (max-width: 768px) {
     width: 100%;
   }
 
 }
-
 
 </style>

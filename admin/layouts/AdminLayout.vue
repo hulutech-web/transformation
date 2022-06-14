@@ -76,6 +76,7 @@ import Menu from "./menu/Menu";
 import Cascader from '../utils/Cascader';
 import {Avatar, Icon} from 'ant-design-vue'
 import img from '#/assets/images/logo.png';
+import judgeDevice from './menu/judgeDevice';
 
 export default {
   meta: {title: '首页'},
@@ -84,7 +85,7 @@ export default {
     return {
       img: img,
       spinning: false,
-      collapsed: false,
+      collapsed: judgeDevice() === 'phone' ? true : false,
       menus: [],
       permissions: [],
       role: null,
@@ -94,7 +95,6 @@ export default {
       user: JSON.parse(localStorage.getItem('user')),
       theme: this.$store.state.theme,
       id: '',
-
     };
   },
   created() {

@@ -3,7 +3,7 @@ return [
     [
         'name' => 'Admin',
         'title' => '超级管理员',
-        'description' => '拥有所有网站权限',
+        'description' => '拥有所有网站权限,业务员账号管理，汽车报告配置，充电桩报告配置，角色权限配置',
     ],
     [
         'name' => 'User',
