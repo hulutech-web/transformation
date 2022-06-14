@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-card title="添加充電樁報告">
+    <a-card title="添加充電樁報告" size="small">
       <template #extra>
         <a-button-group>
           <a-button type="primary" @click="addChargingReportStall" :disabled="stalls.length>=8">
@@ -30,13 +30,13 @@
         </a-form-model-item>
         <a-row :gutter="[16,16]">
 
-          <a-col :span="6" v-for="(stallItem,index) in stalls" :key="index">
-            <div style="border: #8c939d 1px dotted;padding:10px;" @click="locationPoint(index)">
+          <a-col :span="6" v-for="(stallItem,index) in stalls" :key="index" class="stallholder">
+            <div @click="locationPoint(index)">
               <a-tag color="#f50">
                 #{{ index + 1 }}
               </a-tag>
-              <a-form-model-item label="停車場車位號" prop="stalls">
-                <a-select @change="handleChange">
+              <a-form-model-item label="停車場車位號" style="min-width:189px;" prop="stalls">
+                <a-select @change="handleChange" class="stallSelect">
                   <a-select-option v-for="(stall) in stallOptions" :key="stall.id"
                                    :disabled="ChargingPiles.some(item=>item.id==stall.id)">
                     {{ stall.number }}
@@ -45,10 +45,11 @@
               </a-form-model-item>
 
               <a-form-model-item label="设备信息" prop="charging_pile_id">
-                <a-descriptions size="small" layout="vertical" bordered :column="4">
+
+                <a-descriptions class="desc" size="small" layout="vertical" bordered :column="4">
                   <a-descriptions-item :label="name" v-for="(value, name) in  ChargingPiles[index]"
                                        :key="name">
-                    <span style="font-size: .6rem;">{{ value }}</span>
+                    <span style="font-size: .6rem;">{{ value }}@</span>
                   </a-descriptions-item>
                 </a-descriptions>
 
@@ -234,6 +235,22 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+/*
+小尺寸时宽度100%
+*/
+
+.stallholder {
+  border: #8c939d 1px dotted;
+  padding: 4.5px;
+  /*
+小尺寸时宽度100%
+*/
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+
+}
+
 
 </style>
