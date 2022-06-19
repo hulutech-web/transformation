@@ -2,7 +2,7 @@
 return [
     [
         'field_id' => '1',
-        'field_name' => 'IECACT Type 2',
+        'field_name' => 'IEC AC TYPE2',
         'field_options' => [
             [
                 'field_id' => '1.1',
@@ -137,9 +137,8 @@ return [
             ],
             [
                 'field_id' => '4.5',
-                'field_name' => '基金停止開關功能正常',
+                'field_name' => '緊急停止開關功能正常',
                 'value' => 'P',
-
             ],
             [
                 'field_id' => '4.6',

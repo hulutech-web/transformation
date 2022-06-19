@@ -23,6 +23,7 @@
         <template slot="action" slot-scope="text,record">
           <a-button-group>
             <a-button type="primary" size="small" @click="showReport(record)">查看</a-button>
+            <a-button type="primary" size="small" @click="test(record)">測試</a-button>
             <a-button type="danger" size="small" icon="cloud-download" @click="makeReport(record)" ghost>PDF</a-button>
           </a-button-group>
         </template>
