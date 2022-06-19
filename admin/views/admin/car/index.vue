@@ -2,7 +2,7 @@
   <div>
     <a-card title="報告列表" size="small">
       <template #extra>
-        <a-input-search placeholder="请输入公司关键字" enter-button></a-input-search>
+        <a-input-search v-model="keyword" placeholder="请输入公司关键字" enter-button @search="searchReport"></a-input-search>
       </template>
       <a-table bordered :pagination="false" size="small" :dataSource="carReports.data" rowKey="id" :columns="columns">
 
@@ -63,6 +63,7 @@ export default {
     return {
       carReports: [],
       columns: columns,
+      keyword: null,
     }
   },
   created() {
@@ -77,6 +78,9 @@ export default {
     },
     show(record) {
       this.$router.push({path: `/admin/car/${record.id}/show`})
+    },
+    async searchReport() {
+      this.carReports = await this.axios.post("admin/carreport/searchCarReport", {keyword: this.keyword})
     },
     deleteRecord(record) {
       this.$confirm({

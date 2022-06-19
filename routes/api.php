@@ -2,6 +2,7 @@
 
 use App\Api\AuthController;
 use App\Api\CaptchaController;
+use App\Api\CarinfoController;
 use App\Api\CarReportController;
 use App\Api\CarReportItemController;
 use App\Api\ChargingPileController;
@@ -67,7 +68,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('admin/caritem/index', [CarReportItemController::class, 'index']);
     // 汽車報告
     Route::apiResource('admin/carreport', CarReportController::class);
-
+    Route::post("admin/carreport/searchCarReport", [CarReportController::class, "searchCarReport"]);
+//    汽車信息
+    Route::apiResource('admin/carinfo', CarInfoController::class);
+    Route::post("admin/carinfo/searchCarInfo", [CarInfoController::class, "searchCarInfo"]);
     //生成PDF
     Route::post("admin/carreport/{carreport}/export", [CarReportController::class, 'export']);
     //转换pdf

@@ -37,7 +37,6 @@ mix.js("admin/main.js", "public/admin/dist")
         "v-charts",
         "vue-esign",
         "vue-cropper",
-        "vue",
     ]);
 
 // mix.browserSync({

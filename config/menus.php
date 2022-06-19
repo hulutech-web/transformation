@@ -71,10 +71,34 @@ return [
                     'description' => '汽车報告添加',
                 ),
                 'name' => 'admin.car.create',
+            ],
+            [
+                'id' => 7,
+                'parent_id' => 4,
+                'icon' => 'medicine-box',
+                'path' => '/admin/car/info',
+                'meta' => array(
+                    'title' => '客户资料',
+                    'permission' => 'admin.car.info',
+                    'description' => '客户资料',
+                ),
+                'name' => 'admin.car.info',
+            ],
+            [
+                'id' => 8,
+                'parent_id' => 4,
+                'icon' => 'medicine-box',
+                'path' => '/admin/car/customer',
+                'meta' => array(
+                    'title' => '客户列表',
+                    'permission' => 'admin.car.customer',
+                    'description' => '汽車檢修客户列表',
+                ),
+                'name' => 'admin.car.customer',
             ])
     ],
     [
-        'id' => 7,
+        'id' => 9,
         'parent_id' => 0,
         'path' => '/admin/charge',
         'icon' => 'thunderbolt',
@@ -86,8 +110,8 @@ return [
         'name' => 'admin.charge',
         'children' => array(
             [
-                'id' => 8,
-                'parent_id' => 7,
+                'id' => 10,
+                'parent_id' => 9,
                 'icon' => 'hdd',
                 'path' => '/admin/charge/index',
                 'meta' => array(
@@ -98,8 +122,8 @@ return [
                 'name' => 'admin.charge.index',
             ],
             [
-                'id' => 9,
-                'parent_id' => 7,
+                'id' => 11,
+                'parent_id' => 9,
                 'icon' => 'cluster',
                 'path' => '/admin/charge/create',
                 'meta' => array(
@@ -112,11 +136,12 @@ return [
     ],
 
     [
-        'id' => 10,
+        'id' => 12,
         'parent_id' => 0,
         'path' => '/admin/system',
         'icon' => 'setting',
         'meta' => array(
+
             'title' => '系统管理',
             'permission' => 'admin.system',
             'description' => '展示所有系统管理页面',
@@ -124,8 +149,8 @@ return [
         'name' => 'admin.system',
         'children' => array(
             [
-                'id' => 11,
-                'parent_id' => 10,
+                'id' => 13,
+                'parent_id' => 12,
                 'icon' => 'contacts',
                 'path' => '/admin/system/roles',
                 'meta' => array(
@@ -136,8 +161,8 @@ return [
                 'name' => 'admin.system.roles',
             ],
             [
-                'id' => 12,
-                'parent_id' => 10,
+                'id' => 14,
+                'parent_id' => 12,
                 'icon' => 'insurance',
                 'path' => '/admin/system/permissions',
                 'meta' => array(
@@ -148,8 +173,8 @@ return [
                 'name' => 'admin.system.permissions',
             ],
             [
-                'id' => 13,
-                'parent_id' => 10,
+                'id' => 15,
+                'parent_id' => 12,
                 'icon' => 'car',
                 'path' => '/admin/system/car',
                 'meta' => array(
@@ -159,8 +184,8 @@ return [
                 ),
                 'name' => 'admin.system.car',
             ], [
-                'id' => 14,
-                'parent_id' => 10,
+                'id' => 16,
+                'parent_id' => 12,
                 'icon' => 'api',
                 'path' => '/admin/system/charge',
                 'meta' => array(

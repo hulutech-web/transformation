@@ -4,8 +4,9 @@
       <a-form-model ref="ruleForm" :model="form" :rules="rules">
         <a-row :gutter="[16, 16]">
           <a-col :span="12">
-            <a-form-model-item required label="公司名稱" prop="company_name">
-              <a-input v-model="form.company_name" placeholder="請輸入公司名稱"/>
+            <a-form-model-item required label="公司名稱(搜索)" prop="company_name">
+              <Search :value="form.company_name" width="100%" :searchForm="form" :url="url"
+                      @changeValue="changeValue"/>
             </a-form-model-item>
           </a-col>
           <a-col :span="12">
@@ -90,6 +91,7 @@
 <script>
 import UploadList from '#/components/UploadList'
 import moment from 'moment'
+import Search from "#/components/RemoteSearch";
 
 const rules = {
   company_name: [{required: true, message: '請輸入公司名稱', trigger: 'change'}],
@@ -122,7 +124,7 @@ const formItemLayoutWithOutLabel = {
   }
 }
 export default {
-  components: {UploadList},
+  components: {UploadList, Search},
   data() {
     return {
       carreportItem: [],
@@ -130,7 +132,12 @@ export default {
       formItemLayoutWithOutLabel,
       rules,
       moment,
+      url: 'admin/carinfo/searchCarInfo',
       form: {
+        company_name: '',
+        car_number: '',
+        car_type: '',
+        car_brand: '',
         repair_project: [{
           value: ''
         }],
@@ -163,7 +170,7 @@ export default {
           if (this.form.content_brief.some(item => item.value == '')) {
             return this.$message.error({content: '內容簡報不完整'})
           }
-          await this.axios.post('admin/carreport', this.form).then(_=>{
+          await this.axios.post('admin/carreport', this.form).then(_ => {
             this.$router.push('/admin/car/index')
           })
         } else {
@@ -174,6 +181,16 @@ export default {
     },
     resetForm() {
       this.$refs.ruleForm.resetFields();
+    },
+    changeValue(data) {
+      console.log('被點擊了')
+      const {value} = data
+      console.log(value)
+      this.form.company_name = value.company_name
+      this.form.car_number = value.car_number
+      this.form.car_type = value.car_type
+      this.form.car_brand = value.car_brand
+      // console.log(data)
     },
     removeItem(item) {
       console.log(item)

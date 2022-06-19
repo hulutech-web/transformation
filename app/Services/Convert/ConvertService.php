@@ -39,7 +39,7 @@ class ConvertService
         $pdf->SetKeywords('TCPDF, PDF, PHP');
         $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
         // 设置页眉和页脚信息
-        $pdf->SetHeaderData('', 0, env('APP_NAME'), '汽車檢查保養報告', [0, 64, 255], [0, 64, 128]);
+//        $pdf->SetHeaderData('', 0, env('APP_NAME'), '汽車檢查保養報告', [0, 64, 255], [0, 64, 128]);
         $pdf->setFooterData([0, 64, 0], [0, 64, 128]);
 
         // 设置页眉和页脚字体
@@ -70,9 +70,9 @@ class ConvertService
         $this->sectionIntro($pdf, $report_date, $car_number, $car_type, $car_brand, $mileage);
         $this->sectionProject($pdf, $repair_project, $total_cost);
         $this->sectionReport($pdf, $content_brief);
-//        $pdf->Ln(20);//换行符
 
         $this->sectionRemark($pdf, $remark, $user_name, $repair_project_count);
+        $pdf->Ln(20);//换行符
 
         $this->sectionImage($pdf, $attachment, $car_brand);
 
@@ -271,7 +271,7 @@ EOF;
 <tr>
 <th width="70">$order</th>
 <th width="330">$content_report_item_title</th>
-<th width="80">☑</th>
+<th width="80">▣</th>
 <th width="80">□</th>
 <th width="80">□</th>
 </tr>
@@ -282,7 +282,7 @@ EOF;
 <th width="70">$order</th>
 <th width="330">$content_report_item_title</th>
 <th width="80">□</th>
-<th width="80">☑</th>
+<th width="80">▣</th>
 <th width="80">□</th>
 </tr>
 EOF;
@@ -294,7 +294,7 @@ EOF;
 <th width="330">$content_report_item_title</th>
 <th width="80">□</th>
 <th width="80">□</th>
-<th width="80">☑</th>
+<th width="80">▣</th>
 </tr>
 EOF;
             } else {

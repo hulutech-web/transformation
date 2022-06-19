@@ -20,7 +20,8 @@ class CarReportController extends Controller
      */
     public function index()
     {
-        $carReports = CarReport::paginate(5);
+//        修改：最新分页返回
+        $carReports = CarReport::latest()->paginate(5);
         return $carReports;
     }
 
@@ -116,5 +117,16 @@ class CarReportController extends Controller
         return ConvertService::doConvert();
     }
 
+
+//   模糊查询
+
+    public function searchCarReport(Request $request)
+    {
+        //按照公司名称或者车牌号搜索
+        $carReports = CarReport::where('company_name', 'like', '%'.$request->keyword.'%')
+            ->orWhere('car_number', 'like', '%'.$request->keyword.'%')
+            ->paginate(5);
+        return $carReports;
+    }
 
 }
