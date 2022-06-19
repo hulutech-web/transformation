@@ -94,12 +94,11 @@ class ConvertService
 <table>
 <tbody>
 <tr>
-<th colspan="4" style="text-align: center;font-weight:bold;">$company_name<br/><span style="font-size:14px;">INSTITUTO PARA OS<br/>
-ASSUNTOS MUNICIPAIS</span>
+<th colspan="4" style="text-align: center;font-weight:bold;"><br/><br/>$company_name<br/>
 </th>
 <th colspan="2"></th>
 <th colspan="2" style="text-align: end">
-<span style="font-size:12px;text-align: end">
+<span style="font-size:14px;text-align: end">
 <br/><br/>萬眾汽車維修中心<br/>
      車輛保養檢查報告
      </span>

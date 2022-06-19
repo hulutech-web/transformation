@@ -57,7 +57,7 @@ class ConvertChargingService
         $pdf->SetKeywords('TCPDF, PDF, PHP');
         $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
         // 设置页眉和页脚信息
-        $pdf->SetHeaderData('', 0, env('APP_NAME'), '充电桩檢查保養報告', [0, 64, 255], [0, 64, 128]);
+//        $pdf->SetHeaderData('', 0, env('APP_NAME'), '充电桩檢查保養報告', [0, 64, 255], [0, 64, 128]);
         $pdf->setFooterData([0, 64, 0], [0, 64, 128]);
 
         // 设置页眉和页脚字体
