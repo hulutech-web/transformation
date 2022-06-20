@@ -85,7 +85,7 @@ class ChargingReportController extends Controller
     public function test(Request $request, ChargingReport $chargingreport)
     {
 
-        return $this->makeArray(12, 5);
+//        return $this->makeArray(12, 5);
         $chargingResource = new ChargingReportResource($chargingreport);
         $chargingResults = collect($chargingResource)->get('chargingResults');
 
@@ -161,10 +161,10 @@ class ChargingReportController extends Controller
         }, $modelArray);
         $tempArray = array_chunk($tempArray, 5);
         //将最后2个数组合并为一个
-        $popArray = array_pop($tempArray);
+        $popArray = array_pop($tempArray);//返回值為4.6：狀態指示燈顯示正常
         $tLength = count($tempArray);
 
-        array_merge($tempArray[$tLength - 1], $popArray);
+        $resArr = array_push($tempArray[$tLength - 1], $popArray[0]);
 
         return $tempArray;
     }
